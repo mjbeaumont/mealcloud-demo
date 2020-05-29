@@ -15,13 +15,15 @@
           {{ heading }}
         </div>
       </div>
-      <div class="flex" v-for="i in 5" :key="i">
+      <div class="flex" v-for="week in numberWeeks" :key="week">
         <div
-          v-for="j in 7"
-          :key="j"
+          v-for="day in 7"
+          :key="day"
           class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center md:text-3xl"
         >
-          {{ j }}
+          <div class="absolute inset-0 flex items-center justify-center">
+            {{ getCellContents(week, day) }}
+          </div>
         </div>
       </div>
     </div>
@@ -30,10 +32,41 @@
 
 <script>
 export default {
+  computed: {
+    firstDay() {
+      return new Date(
+        this.activeMonth.getFullYear(),
+        this.activeMonth.getMonth()
+      ).getDay();
+    },
+    daysInMonth() {
+      return (
+        32 -
+        new Date(
+          this.activeMonth.getFullYear(),
+          this.activeMonth.getMonth(),
+          32
+        ).getDate()
+      );
+    },
+    numberWeeks() {
+      return Math.ceil((this.daysInMonth + this.firstDay) / 7);
+    }
+  },
+  created() {
+    this.activeMonth = new Date();
+  },
   data() {
     return {
-      headings: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      headings: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      activeMonth: null
     };
+  },
+  methods: {
+    getCellContents(week, day) {
+      const date = day - this.firstDay + (week - 1) * 7;
+      return date > 0 && date <= this.daysInMonth ? date : "";
+    }
   },
   name: "MattCalendar"
 };
