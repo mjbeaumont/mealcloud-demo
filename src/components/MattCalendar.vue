@@ -1,9 +1,13 @@
 <template>
   <div class="container mx-auto md:w-3/4 lg:w-1/2">
     <div class="flex justify-between">
-      <span class="pi pi-arrow-left leading-relaxed text-3xl"></span>
-      <div class="uppercase font-bold text-3xl">May 2020</div>
-      <span class="pi pi-arrow-right leading-relaxed text-3xl"></span>
+      <a class="cursor-pointer" @click.prevent="nav(-1)"
+        ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
+      ></a>
+      <div class="uppercase font-bold text-3xl">{{ monthHeading }}</div>
+      <a class="cursor-pointer" @click.prevent="nav(1)"
+        ><span class="pi pi-arrow-right leading-relaxed text-3xl"></span
+      ></a>
     </div>
     <div class="calendar mx-auto">
       <div class="flex">
@@ -12,7 +16,9 @@
           :key="heading"
           class="font-bold date-column flex justify-center items-center md:text-3xl"
         >
-          {{ heading }}
+          <div class="absolute inset-0 flex items-end justify-center">
+            {{ heading }}
+          </div>
         </div>
       </div>
       <div class="flex" v-for="week in numberWeeks" :key="week">
@@ -31,6 +37,7 @@
 </template>
 
 <script>
+import { monthNames } from "@/utils/date-helpers";
 export default {
   computed: {
     firstDay() {
@@ -49,6 +56,13 @@ export default {
         ).getDate()
       );
     },
+    monthHeading() {
+      return this.activeMonth
+        ? monthNames[this.activeMonth.getMonth()] +
+            " " +
+            this.activeMonth.getFullYear()
+        : "";
+    },
     numberWeeks() {
       return Math.ceil((this.daysInMonth + this.firstDay) / 7);
     }
@@ -66,6 +80,10 @@ export default {
     getCellContents(week, day) {
       const date = day - this.firstDay + (week - 1) * 7;
       return date > 0 && date <= this.daysInMonth ? date : "";
+    },
+    nav(direction) {
+      const newMonth = this.activeMonth.getMonth() + direction;
+      this.activeMonth = new Date(this.activeMonth.setMonth(newMonth));
     }
   },
   name: "MattCalendar"
