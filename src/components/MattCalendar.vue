@@ -80,20 +80,37 @@ export default {
   data() {
     return {
       headings: dayNamesShort,
-      activeDate: null
+      activeDate: null,
+      selectedDate: null
     };
   },
   methods: {
     getCellContents(week, day) {
-      const date = getDate({ week, day, firstDay: this.firstDay });
+      const date = this.getDate({ week, day });
       return date > 0 && date <= this.daysInMonth ? date : "";
+    },
+    getDate({ week, day }) {
+      return getDate({ week, day, firstDay: this.firstDay });
     },
     nav(direction) {
       const newMonth = this.activeDate.getMonth() + direction;
       this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+    },
+    selectDate(week, day) {
+      const date = this.getDate({ week, day });
+      this.selectedDate = new Date(this.activeYear, this.activeMonth, date);
+      this.updateValue();
+    },
+    updateValue() {
+      this.$emit("input", this.selectedDate);
     }
   },
-  name: "MattCalendar"
+  name: "MattCalendar",
+  props: {
+    value: {
+      type: String
+    }
+  }
 };
 </script>
 
