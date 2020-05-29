@@ -21,15 +21,18 @@
           </div>
         </div>
       </div>
-      <div class="flex" v-for="week in numberWeeks" :key="week">
+      <div class="flex" v-for="week in weeksInMonth" :key="week">
         <div
           v-for="day in 7"
           :key="day"
           class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center md:text-3xl"
         >
-          <div class="absolute inset-0 flex items-center justify-center">
+          <a
+            class="absolute inset-0 flex items-center justify-center cursor-pointer"
+            @click.prevent="selectDate(week, day)"
+          >
             {{ getCellContents(week, day) }}
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -37,53 +40,57 @@
 </template>
 
 <script>
-import { monthNames } from "@/utils/date-helpers";
+import {
+  dayNamesShort,
+  monthNames,
+  getDate,
+  daysInMonth,
+  firstDay,
+  weeksInMonth
+} from "@/utils/date-helpers";
 export default {
   computed: {
+    activeMonth() {
+      return this.activeDate.getMonth();
+    },
+    activeYear() {
+      return this.activeDate.getFullYear();
+    },
     firstDay() {
-      return new Date(
-        this.activeMonth.getFullYear(),
-        this.activeMonth.getMonth()
-      ).getDay();
+      return firstDay({ year: this.activeYear, month: this.activeMonth });
     },
     daysInMonth() {
-      return (
-        32 -
-        new Date(
-          this.activeMonth.getFullYear(),
-          this.activeMonth.getMonth(),
-          32
-        ).getDate()
-      );
+      return daysInMonth({ year: this.activeYear, month: this.activeMonth });
     },
     monthHeading() {
       return this.activeMonth
-        ? monthNames[this.activeMonth.getMonth()] +
-            " " +
-            this.activeMonth.getFullYear()
+        ? monthNames[this.activeMonth] + " " + this.activeYear
         : "";
     },
-    numberWeeks() {
-      return Math.ceil((this.daysInMonth + this.firstDay) / 7);
+    weeksInMonth() {
+      return weeksInMonth({
+        daysInMonth: this.daysInMonth,
+        firstDay: this.firstDay
+      });
     }
   },
   created() {
-    this.activeMonth = new Date();
+    this.activeDate = new Date();
   },
   data() {
     return {
-      headings: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-      activeMonth: null
+      headings: dayNamesShort,
+      activeDate: null
     };
   },
   methods: {
     getCellContents(week, day) {
-      const date = day - this.firstDay + (week - 1) * 7;
+      const date = getDate({ week, day, firstDay: this.firstDay });
       return date > 0 && date <= this.daysInMonth ? date : "";
     },
     nav(direction) {
-      const newMonth = this.activeMonth.getMonth() + direction;
-      this.activeMonth = new Date(this.activeMonth.setMonth(newMonth));
+      const newMonth = this.activeDate.getMonth() + direction;
+      this.activeDate = new Date(this.activeDate.setMonth(newMonth));
     }
   },
   name: "MattCalendar"
