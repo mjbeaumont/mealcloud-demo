@@ -1,11 +1,20 @@
 <template>
   <div id="app">
+    <MattCalendar></MattCalendar>
   </div>
 </template>
 
 <script>
-
+import MattCalendar from "@/components/MattCalendar";
+import "primeicons/primeicons.css";
 export default {
+  components: { MattCalendar },
+  data() {
+    return {
+      value: null
+    };
+  },
+  name: "App"
 };
 </script>
 
@@ -15,7 +24,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: black;
+  color: #fff;
 }
 </style>
