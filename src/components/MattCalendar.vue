@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { dayNamesShort, getDate, weeksInMonth } from "@/utils/date-helpers";
 import * as dayjs from "dayjs";
 export default {
   computed: {
@@ -85,24 +84,21 @@ export default {
         : "invisible";
     },
     weeksInMonth() {
-      return weeksInMonth({
-        daysInMonth: this.daysInMonth,
-        firstDay: this.firstDay
-      });
+      return Math.ceil((this.daysInMonth + this.firstDay) / 7);
     }
   },
   created() {
-    this.activeDate = dayjs().startOf("day");
     if (this.minDate) {
       this.minimumDate = dayjs(this.minDate).startOf("day");
     }
     if (this.maxDate) {
       this.maximumDate = dayjs(this.maxDate).startOf("day");
     }
+    this.setInitialDate();
   },
   data() {
     return {
-      headings: dayNamesShort,
+      headings: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       activeDate: null,
       minimumDate: null,
       maximumDate: null,
@@ -124,7 +120,7 @@ export default {
       return date > 0 && date <= this.daysInMonth ? date : "";
     },
     getDate({ week, day }) {
-      return getDate({ week, day, firstDay: this.firstDay });
+      return day - this.firstDay + (week - 1) * 7;
     },
     isSelected(week, day) {
       if (
@@ -163,6 +159,24 @@ export default {
         new Date(this.activeDateMeta.year, this.activeDateMeta.month, date)
       );
       this.updateValue();
+    },
+    setInitialDate() {
+      let currentDate = dayjs().startOf("month");
+      if (
+        this.minimumDate &&
+        this.minimumDate.startOf("month").isAfter(currentDate)
+      ) {
+        currentDate = currentDate.month(this.minimumDate.month());
+      }
+
+      if (
+        this.maximumDate &&
+        this.maximumDate.startOf("month").isBefore(currentDate)
+      ) {
+        currentDate = currentDate.month(this.maximumDate.month());
+      }
+
+      this.activeDate = currentDate;
     },
     updateValue() {
       this.$emit("input", this.selectedDate);
