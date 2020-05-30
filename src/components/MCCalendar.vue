@@ -116,7 +116,7 @@ export default {
   name: "McCalendar",
   props: {
     value: {
-      type: String
+      type: Object
     },
     minDate: {
       type: Date
