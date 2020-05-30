@@ -46,23 +46,6 @@ import MCCalendarDay from "./MCCalendarDay";
 export default {
   components: { MCCalendarDay, MCCalendarHeader },
   computed: {
-    activeDateMeta() {
-      return this.activeDate
-        ? {
-            month: this.activeDate.month(),
-            year: this.activeDate.year()
-          }
-        : null;
-    },
-    selectedYearMeta() {
-      return this.selectedDate
-        ? {
-            date: this.selectedDate.date(),
-            month: this.selectedDate.month(),
-            year: this.selectedDate.year()
-          }
-        : null;
-    },
     firstDay() {
       return this.activeDate.startOf("month").day();
     },
