@@ -1,11 +1,11 @@
 <template>
   <div class="container mx-auto md:w-3/4 lg:w-1/2">
     <div class="flex justify-between">
-      <a class="cursor-pointer" @click.prevent="nav(-1)" :class="prevClass"
+      <a class="cursor-pointer" @click.prevent="prev" :class="prevClass"
         ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
       ></a>
       <div class="uppercase font-bold text-3xl">{{ monthHeading }}</div>
-      <a class="cursor-pointer" @click.prevent="nav(1)" :class="nextClass"
+      <a class="cursor-pointer" @click.prevent="next" :class="nextClass"
         ><span class="pi pi-arrow-right leading-relaxed text-3xl"></span
       ></a>
     </div>
@@ -138,11 +138,8 @@ export default {
       const date = this.getDate({ week, day });
       return this.selectedDate.date() === date;
     },
-    nav(direction) {
-      this.activeDate =
-        direction > 0
-          ? this.activeDate.add(1, "month")
-          : this.activeDate.subtract(1, "month");
+    next() {
+      this.activeDate = this.activeDate.add(1, "month");
     },
     outsideRange(week, day) {
       if (this.minDate || this.maxDate) {
@@ -156,6 +153,9 @@ export default {
         );
       }
       return false;
+    },
+    prev() {
+      this.activeDate = this.activeDate.subtract(1, "month");
     },
     selectDate(week, day) {
       const date = this.getDate({ week, day });
