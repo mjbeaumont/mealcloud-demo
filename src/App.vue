@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <MattCalendar></MattCalendar>
+    <MCCalendar></MCCalendar>
   </div>
 </template>
 
 <script>
-import MattCalendar from "@/components/MattCalendar";
+import MCCalendar from "@/components/MCCalendar";
 import "primeicons/primeicons.css";
 export default {
-  components: { MattCalendar },
+  components: { MCCalendar },
   data() {
     return {
       value: null

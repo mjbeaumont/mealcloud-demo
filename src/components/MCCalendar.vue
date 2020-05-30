@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto md:w-3/4 lg:w-1/2">
+  <div class="mx-auto md:w-3/4 lg:w-1/2">
     <div class="flex justify-between">
       <a class="cursor-pointer" @click.prevent="prev" :class="prevClass"
         ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
@@ -182,7 +182,7 @@ export default {
       this.$emit("input", this.selectedDate);
     }
   },
-  name: "MattCalendar",
+  name: "McCalendar",
   props: {
     value: {
       type: String
