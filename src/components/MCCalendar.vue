@@ -24,14 +24,14 @@
           :key="day"
           class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center md:text-3xl"
         >
-          <a
-            class="absolute inset-0 flex items-center justify-center"
-            @click.prevent="selectDate(week, day)"
-            :disabled="outsideRange(week, day)"
-            :class="dayClass(week, day)"
-          >
-            {{ getCellContents(week, day) }}
-          </a>
+          <MCCalendarDay
+            :date="createDate(week, day)"
+            :minimum-date="minimumDate"
+            :maximum-date="maximumDate"
+            :selected-date="selectedDate"
+            :active-date="activeDate"
+            @choose="selectDate"
+          />
         </div>
       </div>
     </div>
@@ -41,9 +41,10 @@
 <script>
 import * as dayjs from "dayjs";
 import MCCalendarHeader from "./MCCalendarHeader";
+import MCCalendarDay from "./MCCalendarDay";
 
 export default {
-  components: { MCCalendarHeader },
+  components: { MCCalendarDay, MCCalendarHeader },
   computed: {
     activeDateMeta() {
       return this.activeDate
@@ -91,55 +92,20 @@ export default {
     };
   },
   methods: {
-    dayClass(week, day) {
-      let className = this.outsideRange(week, day)
-        ? "text-gray-800"
-        : "cursor-pointer";
-      if (this.isSelected(week, day)) {
-        className += " text-yellow-300";
-      }
-      return className;
-    },
-    getCellContents(week, day) {
+    createDate(week, day) {
       const date = this.getDate({ week, day });
-      return date > 0 && date <= this.daysInMonth ? date : "";
+      return dayjs(
+        new Date(this.activeDate.year(), this.activeDate.month(), date)
+      );
     },
     getDate({ week, day }) {
       return day - this.firstDay + (week - 1) * 7;
     },
-    isSelected(week, day) {
-      if (
-        !this.selectedDate ||
-        this.selectedDate.year() !== this.activeDateMeta.year ||
-        this.selectedDate.month() !== this.activeDateMeta.month
-      ) {
-        return false;
-      }
-
-      const date = this.getDate({ week, day });
-      return this.selectedDate.date() === date;
-    },
     nav(val) {
       this.activeDate = val;
     },
-    outsideRange(week, day) {
-      if (this.minDate || this.maxDate) {
-        const date = this.getDate({ week, day });
-        const dateObj = dayjs(
-          new Date(this.activeDateMeta.year, this.activeDateMeta.month, date)
-        );
-        return (
-          (this.minDate && dateObj.isBefore(this.minDate)) ||
-          (this.maxDate && dateObj.isAfter(this.maxDate))
-        );
-      }
-      return false;
-    },
-    selectDate(week, day) {
-      const date = this.getDate({ week, day });
-      this.selectedDate = dayjs(
-        new Date(this.activeDateMeta.year, this.activeDateMeta.month, date)
-      );
+    selectDate(val) {
+      this.selectedDate = val;
       this.updateValue();
     },
     setInitialDate() {
