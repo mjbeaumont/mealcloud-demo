@@ -28,8 +28,10 @@
           class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center md:text-3xl"
         >
           <a
-            class="absolute inset-0 flex items-center justify-center cursor-pointer"
+            class="absolute inset-0 flex items-center justify-center"
             @click.prevent="selectDate(week, day)"
+            :disabled="outsideRange(week, day)"
+            :class="dayClass(week, day)"
           >
             {{ getCellContents(week, day) }}
           </a>
@@ -75,7 +77,15 @@ export default {
     }
   },
   created() {
-    this.activeDate = new Date();
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    this.activeDate = date;
+    if (this.minDate) {
+      this.minDate.setHours(0, 0, 0, 0);
+    }
+    if (this.maxDate) {
+      this.maxDate.setHours(0, 0, 0, 0);
+    }
   },
   data() {
     return {
@@ -85,6 +95,9 @@ export default {
     };
   },
   methods: {
+    dayClass(week, day) {
+      return this.outsideRange(week, day) ? "text-red-600" : "cursor-pointer";
+    },
     getCellContents(week, day) {
       const date = this.getDate({ week, day });
       return date > 0 && date <= this.daysInMonth ? date : "";
@@ -95,6 +108,25 @@ export default {
     nav(direction) {
       const newMonth = this.activeDate.getMonth() + direction;
       this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+    },
+    outsideRange(week, day) {
+      if (this.minDate || this.maxDate) {
+        const date = this.getDate({ week, day });
+        const dateObj = new Date(this.activeYear, this.activeMonth, date);
+        console.log(dateObj);
+        if (
+          this.minDate &&
+          dateObj < this.minDate &&
+          dateObj.getTime() !== this.minDate.getTime()
+        ) {
+          return true;
+        }
+
+        if (this.maxDate && dateObj > this.maxDate) {
+          return true;
+        }
+      }
+      return false;
     },
     selectDate(week, day) {
       const date = this.getDate({ week, day });
@@ -109,6 +141,12 @@ export default {
   props: {
     value: {
       type: String
+    },
+    minDate: {
+      type: Date
+    },
+    maxDate: {
+      type: Date
     }
   }
 };
