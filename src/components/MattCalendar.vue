@@ -65,13 +65,14 @@ export default {
       return daysInMonth({ year: this.activeYear, month: this.activeMonth });
     },
     monthHeading() {
-      return this.activeMonth
+      return this.activeMonth >= 0
         ? monthNames[this.activeMonth] + " " + this.activeYear
         : "";
     },
     nextClass() {
       if (this.maxDate) {
-        return this.activeMonth <= this.maxDate.getMonth() - 1
+        return this.activeYear < this.maxDate.getFullYear() ||
+          this.activeMonth <= this.maxDate.getMonth() - 1
           ? "visible"
           : "invisible";
       }
@@ -79,7 +80,8 @@ export default {
     },
     prevClass() {
       if (this.minDate) {
-        return this.activeMonth >= this.minDate.getMonth() + 1
+        return this.activeYear > this.minDate.getFullYear() ||
+          this.activeMonth >= this.minDate.getMonth() + 1
           ? "visible"
           : "invisible";
       }
@@ -94,6 +96,7 @@ export default {
   },
   created() {
     const date = new Date();
+    date.setDate(1);
     date.setHours(0, 0, 0, 0);
     this.activeDate = date;
     if (this.minDate) {
@@ -127,7 +130,19 @@ export default {
         (!this.minDate || newMonth >= this.minDate.getMonth()) &&
         (!this.maxDate || newMonth <= this.maxDate.getMonth())
       ) {
-        this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+        if (newMonth === 12) {
+          this.activeDate.setMonth(0);
+          this.activeDate = new Date(
+            this.activeDate.setFullYear(this.activeDate.getFullYear() + 1)
+          );
+        } else if (newMonth === 0) {
+          this.activeDate.setMonth(12);
+          this.activeDate = new Date(
+            this.activeDate.setFullYear(this.activeDate.getFullYear() - 1)
+          );
+        } else {
+          this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+        }
       }
     },
     outsideRange(week, day) {
