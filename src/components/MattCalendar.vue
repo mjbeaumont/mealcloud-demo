@@ -1,11 +1,11 @@
 <template>
   <div class="container mx-auto md:w-3/4 lg:w-1/2">
     <div class="flex justify-between">
-      <a class="cursor-pointer" @click.prevent="nav(-1)"
+      <a class="cursor-pointer" @click.prevent="nav(-1)" :class="prevClass"
         ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
       ></a>
       <div class="uppercase font-bold text-3xl">{{ monthHeading }}</div>
-      <a class="cursor-pointer" @click.prevent="nav(1)"
+      <a class="cursor-pointer" @click.prevent="nav(1)" :class="nextClass"
         ><span class="pi pi-arrow-right leading-relaxed text-3xl"></span
       ></a>
     </div>
@@ -69,6 +69,22 @@ export default {
         ? monthNames[this.activeMonth] + " " + this.activeYear
         : "";
     },
+    nextClass() {
+      if (this.maxDate) {
+        return this.activeMonth <= this.maxDate.getMonth() - 1
+          ? "visible"
+          : "invisible";
+      }
+      return "visible";
+    },
+    prevClass() {
+      if (this.minDate) {
+        return this.activeMonth >= this.minDate.getMonth() + 1
+          ? "visible"
+          : "invisible";
+      }
+      return "visible";
+    },
     weeksInMonth() {
       return weeksInMonth({
         daysInMonth: this.daysInMonth,
@@ -107,13 +123,17 @@ export default {
     },
     nav(direction) {
       const newMonth = this.activeDate.getMonth() + direction;
-      this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+      if (
+        (!this.minDate || newMonth >= this.minDate.getMonth()) &&
+        (!this.maxDate || newMonth <= this.maxDate.getMonth())
+      ) {
+        this.activeDate = new Date(this.activeDate.setMonth(newMonth));
+      }
     },
     outsideRange(week, day) {
       if (this.minDate || this.maxDate) {
         const date = this.getDate({ week, day });
         const dateObj = new Date(this.activeYear, this.activeMonth, date);
-        console.log(dateObj);
         if (
           this.minDate &&
           dateObj < this.minDate &&
