@@ -1,14 +1,11 @@
 <template>
   <div class="mx-auto md:w-3/4 lg:w-1/2">
-    <div class="flex justify-between">
-      <a class="cursor-pointer" @click.prevent="prev" :class="prevClass"
-        ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
-      ></a>
-      <div class="uppercase font-bold text-3xl">{{ monthHeading }}</div>
-      <a class="cursor-pointer" @click.prevent="next" :class="nextClass"
-        ><span class="pi pi-arrow-right leading-relaxed text-3xl"></span
-      ></a>
-    </div>
+    <MCCalendarHeader
+      :active-date="activeDate"
+      :maximum-date="maximumDate"
+      :minimum-date="minimumDate"
+      @nav="nav"
+    />
     <div class="calendar mx-auto">
       <div class="flex">
         <div
@@ -43,7 +40,10 @@
 
 <script>
 import * as dayjs from "dayjs";
+import MCCalendarHeader from "./MCCalendarHeader";
+
 export default {
+  components: { MCCalendarHeader },
   computed: {
     activeDateMeta() {
       return this.activeDate
@@ -67,21 +67,6 @@ export default {
     },
     daysInMonth() {
       return this.activeDate.daysInMonth();
-    },
-    monthHeading() {
-      return this.activeDate.format("MMMM YYYY");
-    },
-    nextClass() {
-      return !this.maximumDate ||
-        this.activeDate.startOf("month") < this.maximumDate.startOf("month")
-        ? "visible"
-        : "invisible";
-    },
-    prevClass() {
-      return !this.minimumDate ||
-        this.activeDate.startOf("month") > this.minimumDate.startOf("month")
-        ? "visible"
-        : "invisible";
     },
     weeksInMonth() {
       return Math.ceil((this.daysInMonth + this.firstDay) / 7);
@@ -134,8 +119,8 @@ export default {
       const date = this.getDate({ week, day });
       return this.selectedDate.date() === date;
     },
-    next() {
-      this.activeDate = this.activeDate.add(1, "month");
+    nav(val) {
+      this.activeDate = val;
     },
     outsideRange(week, day) {
       if (this.minDate || this.maxDate) {
@@ -149,9 +134,6 @@ export default {
         );
       }
       return false;
-    },
-    prev() {
-      this.activeDate = this.activeDate.subtract(1, "month");
     },
     selectDate(week, day) {
       const date = this.getDate({ week, day });
