@@ -115,7 +115,13 @@ export default {
   },
   methods: {
     dayClass(week, day) {
-      return this.outsideRange(week, day) ? "text-red-600" : "cursor-pointer";
+      let className = this.outsideRange(week, day)
+        ? "text-grey-600"
+        : "cursor-pointer";
+      if (this.isSelected(week, day)) {
+        className += " text-yellow-300";
+      }
+      return className;
     },
     getCellContents(week, day) {
       const date = this.getDate({ week, day });
@@ -123,6 +129,18 @@ export default {
     },
     getDate({ week, day }) {
       return getDate({ week, day, firstDay: this.firstDay });
+    },
+    isSelected(week, day) {
+      if (
+        !this.selectedDate ||
+        this.selectedDate.getFullYear() !== this.activeYear ||
+        this.selectedDate.getMonth() !== this.activeMonth
+      ) {
+        return false;
+      }
+
+      const date = this.getDate({ week, day });
+      return this.selectedDate.getDate() === date;
     },
     nav(direction) {
       const newMonth = this.activeDate.getMonth() + direction;
