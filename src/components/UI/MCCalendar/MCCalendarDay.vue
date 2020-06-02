@@ -1,6 +1,6 @@
 <template>
   <a
-    class="absolute inset-0 flex items-center justify-center"
+    class="absolute inset-0 flex items-center justify-center text-xl md:text-2xl"
     @click.prevent="selectDate"
     :disabled="outsideRange"
     :class="additionalClasses"
@@ -14,7 +14,9 @@ export default {
     additionalClasses() {
       let className = this.outsideRange ? "text-gray-800" : "cursor-pointer";
       if (this.isSelected) {
-        className += " text-yellow-300";
+        className += " bg-green-400 font-bold ";
+      } else {
+        className += " bg-white bg-opacity-50";
       }
       return className;
     },

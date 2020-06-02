@@ -22,7 +22,7 @@
         <div
           v-for="day in 7"
           :key="day"
-          class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center text-xl"
+          class="border border-white date-column flex justify-center items-center"
         >
           <MCCalendarDay
             :date="createDate(week, day)"
