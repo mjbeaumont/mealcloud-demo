@@ -12,7 +12,8 @@ import { sync } from "vuex-pathify";
 
 export default {
   components: {
-    OrderType
+    OrderType,
+    OrderLocation: () => import("@/views/OrderLocation")
   },
   computed: {
     activeComponent: sync("activeComponent")

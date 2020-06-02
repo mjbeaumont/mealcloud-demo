@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen text-3xl">
+  <div
+    class="mx-auto flex flex-col items-center justify-center h-screen text-3xl max-w-screen-md"
+  >
     <h2 class="font-bold md:text-6xl">
       Would you like to order <span class="md:block">Pickup or Delivery?</span>
     </h2>
