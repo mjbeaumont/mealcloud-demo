@@ -1,11 +1,22 @@
 <template>
-  <div id="app"></div>
+  <div id="app" class="container">
+    <component :is="activeComponent"></component>
+  </div>
 </template>
 
 <script>
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
+import OrderType from "@/views/OrderType";
+import { sync } from "vuex-pathify";
+
 export default {
+  components: {
+    OrderType
+  },
+  computed: {
+    activeComponent: sync("activeComponent")
+  },
   data() {
     return {
       date: null,
@@ -18,19 +29,29 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.activeComponent = "OrderType";
+  },
   name: "App"
 };
 </script>
 
 <style lang="scss">
+html,
+body {
+  background: #000;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: black;
+  background: #000;
   color: #fff;
   padding-bottom: 30em;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
 }
 .p-dropdown {
   @apply w-1/2 mt-16 bg-white bg-opacity-50 text-6xl border-white border;
