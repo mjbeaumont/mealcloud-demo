@@ -2,7 +2,8 @@ import { make } from "vuex-pathify";
 
 const state = () => {
   return {
-    type: ""
+    type: "",
+    location: {}
   };
 };
 
