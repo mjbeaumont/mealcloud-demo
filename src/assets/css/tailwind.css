@@ -2,7 +2,7 @@
 @tailwind components;
 
 .mc-input {
-    @apply bg-white bg-opacity-50;
+    @apply bg-white bg-opacity-50 text-2xl;
 }
 
 .mc-input-light {
@@ -13,12 +13,25 @@
     @apply text-black;
 }
 
-.p-dropdown {
-    @apply w-1/2 mt-16;
+.question-text {
+    @apply leading-none font-bold mb-12 text-3xl;
+}
+
+@media screen and (min-width: 768px) {
+    .question-text {
+        @apply text-5xl;
+    }
+    .mc-input {
+        @apply text-4xl;
+    }
 }
 
 .p-dropdown .p-dropdown-trigger {
-    @apply border-l border-white px-8;
+    @apply border-l border-white px-2;
+}
+
+.p-dropdown-items-wrapper {
+    @apply bg-white text-black;
 }
 
 

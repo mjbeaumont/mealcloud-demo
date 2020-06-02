@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto md:w-3/4 lg:w-1/2">
+  <div class="mx-auto w-full md:w-3/4">
     <MCCalendarHeader
       :active-date="activeDate"
       :maximum-date="maximumDate"
@@ -11,7 +11,7 @@
         <div
           v-for="heading in headings"
           :key="heading"
-          class="font-bold date-column flex justify-center items-center md:text-3xl"
+          class="font-bold date-column flex justify-center items-center text-xl"
         >
           <div class="absolute inset-0 flex items-end justify-center">
             {{ heading }}
@@ -22,7 +22,7 @@
         <div
           v-for="day in 7"
           :key="day"
-          class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center md:text-3xl"
+          class="border border-white date-column bg-white bg-opacity-50 flex justify-center items-center text-xl"
         >
           <MCCalendarDay
             :date="createDate(week, day)"

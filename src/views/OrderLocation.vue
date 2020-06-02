@@ -1,11 +1,11 @@
 <template>
   <div
-    class="mx-auto max-w-screen-md md:pt-48 flex flex-col items-center justify-center h-screen text-2xl md:text-xl"
+    class="mx-auto max-w-screen-md pt-12 pb-4 flex flex-col items-center min-h-screen"
   >
-    <h2 class="font-bold md:text-6xl">
+    <h2 class="question-text">
       Which location would you like to pick up from?
     </h2>
-    <div class="flex flex-col mt-12 md:text-5xl">
+    <div class="flex flex-col md:text-5xl">
       <button
         v-for="location in locations"
         :key="location.id"
@@ -36,7 +36,7 @@ export default {
       this.location = val;
     }
   },
-  name: "OrderLocation.vue"
+  name: "OrderLocation"
 };
 </script>
 

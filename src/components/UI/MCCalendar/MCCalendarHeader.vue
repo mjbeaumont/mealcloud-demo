@@ -1,11 +1,15 @@
 <template>
   <div class="flex justify-between">
     <a class="cursor-pointer" @click.prevent="prev" :class="prevClass"
-      ><span class="pi pi-arrow-left leading-relaxed text-3xl"></span
+      ><span
+        class="pi pi-arrow-left leading-relaxed text-2xl md:text-3xl"
+      ></span
     ></a>
-    <div class="uppercase font-bold text-3xl">{{ heading }}</div>
+    <div class="uppercase font-bold text-2xl md:text-3xl">{{ heading }}</div>
     <a class="cursor-pointer" @click.prevent="next" :class="nextClass"
-      ><span class="pi pi-arrow-right leading-relaxed text-3xl"></span
+      ><span
+        class="pi pi-arrow-right leading-relaxed text-2xl md:text-3xl"
+      ></span
     ></a>
   </div>
 </template>

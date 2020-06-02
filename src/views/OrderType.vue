@@ -1,11 +1,11 @@
 <template>
   <div
-    class="mx-auto flex flex-col items-center justify-center h-screen text-3xl max-w-screen-md"
+    class="mx-auto pt-12 flex flex-col items-center min-h-screen max-w-screen-md"
   >
-    <h2 class="font-bold md:text-6xl">
+    <h2 class="question-text">
       Would you like to order <span class="md:block">Pickup or Delivery?</span>
     </h2>
-    <div class="mt-12 flex flex-col md:flex-row md:text-5xl">
+    <div class="flex flex-col md:flex-row md:text-5xl">
       <button
         class="mc-input mc-input-dark font-bold uppercase py-2 px-8 md:px-0 md:w-64 text-center"
         @click="setType('delivery')"
