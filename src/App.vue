@@ -53,10 +53,4 @@ body {
   width: 100%;
   margin: 0 auto;
 }
-.p-dropdown {
-  @apply w-1/2 mt-16 bg-white bg-opacity-50 text-6xl border-white border;
-  .p-dropdown-trigger {
-    @apply border-l border-white px-8;
-  }
-}
 </style>

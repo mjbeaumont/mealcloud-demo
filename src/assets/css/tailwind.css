@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
+
+.mc-input {
+    @apply bg-white bg-opacity-50;
+}
+
+.mc-input-light {
+    @apply text-white border border-white;
+}
+
+.mc-input-dark {
+    @apply text-black;
+}
+
+.p-dropdown {
+    @apply w-1/2 mt-16;
+}
+
+.p-dropdown .p-dropdown-trigger {
+    @apply border-l border-white px-8;
+}
+
+
 @tailwind utilities;
