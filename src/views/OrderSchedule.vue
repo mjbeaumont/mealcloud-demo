@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="mx-auto px-2 max-w-screen-md pt-12 flex flex-col items-center min-h-screen"
-  >
+  <div class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen">
     <h2 class="question-text">{{ instructions }}</h2>
     <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
     <Dropdown

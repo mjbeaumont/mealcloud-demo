@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" class="container pt-12 pb-4 px-2">
     <component :is="activeComponent"></component>
   </div>
 </template>
@@ -13,25 +13,14 @@ import { sync } from "vuex-pathify";
 export default {
   components: {
     OrderType,
-    OrderLocation: () => import("@/views/OrderLocation")
+    OrderLocation: () => import("@/views/OrderLocation"),
+    OrderSchedule: () => import("@/views/OrderSchedule")
   },
   computed: {
     activeComponent: sync("activeComponent")
   },
-  data() {
-    return {
-      date: null,
-      time: null,
-      times: [
-        { name: "7:00PM", code: "7:00PM" },
-        { name: "7:15PM", code: "7:15PM" },
-        { name: "7:30PM", code: "7:30PM" },
-        { name: "8:00PM", code: "8:00PM" }
-      ]
-    };
-  },
   mounted() {
-    this.activeComponent = "OrderType";
+    this.activeComponent = "OrderSchedule";
   },
   name: "App"
 };
@@ -49,7 +38,6 @@ body {
   text-align: center;
   background: #000;
   color: #fff;
-  padding-bottom: 30em;
   height: 100%;
   width: 100%;
   margin: 0 auto;

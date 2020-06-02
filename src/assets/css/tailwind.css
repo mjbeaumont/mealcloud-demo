@@ -19,7 +19,7 @@
 
 @media screen and (min-width: 768px) {
     .question-text {
-        @apply text-5xl;
+        @apply text-4xl;
     }
     .mc-input {
         @apply text-4xl;

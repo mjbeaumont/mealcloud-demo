@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="mx-auto max-w-screen-md pt-12 pb-4 flex flex-col items-center min-h-screen"
-  >
+  <div class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen">
     <h2 class="question-text">
       Which location would you like to pick up from?
     </h2>

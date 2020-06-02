@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="mx-auto pt-12 flex flex-col items-center min-h-screen max-w-screen-md"
-  >
+  <div class="mx-auto flex flex-col items-center min-h-screen max-w-screen-md">
     <h2 class="question-text">
       Would you like to order <span class="md:block">Pickup or Delivery?</span>
     </h2>
