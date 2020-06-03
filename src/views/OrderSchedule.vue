@@ -24,6 +24,7 @@
 import { sync, get } from "vuex-pathify";
 import { createFullTimeOptions, createPartialTimeOptions } from "@/data/times";
 import MCCalendar from "@/components/UI/MCCalendar/MCCalendar";
+import BackToTop from "@/mixins/BackToTop";
 import Dropdown from "primevue/dropdown";
 import * as dayjs from "dayjs";
 export default {
@@ -61,8 +62,8 @@ export default {
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0))
     };
   },
+  mixins: [BackToTop],
   mounted() {
-    window.scroll({ top: 0, left: 0, behavior: "smooth" });
     const observer = new MutationObserver(mutationsList => {
       for (let mutation of mutationsList) {
         if (
@@ -84,7 +85,9 @@ export default {
   watch: {
     time(val) {
       if (val) {
-        this.activeComponent = "OrderMenu";
+        setTimeout(() => {
+          this.activeComponent = "OrderMenu";
+        }, 1000);
       }
     }
   }

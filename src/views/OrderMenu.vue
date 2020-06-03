@@ -5,7 +5,9 @@
 </template>
 
 <script>
+import BackToTop from "@/mixins/BackToTop";
 export default {
+  mixins: [BackToTop],
   name: "OrderMenu"
 };
 </script>

@@ -19,6 +19,7 @@
 
 <script>
 import { sync } from "vuex-pathify";
+import BackToTop from "@/mixins/BackToTop";
 import locations from "@/data/locations";
 export default {
   computed: {
@@ -36,9 +37,7 @@ export default {
       this.activeComponent = "OrderSchedule";
     }
   },
-  mounted() {
-    window.scroll({ top: 0, left: 0, behavior: "smooth" });
-  },
+  mixins: [BackToTop],
   name: "OrderLocation"
 };
 </script>

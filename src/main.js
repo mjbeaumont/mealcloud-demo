@@ -8,6 +8,11 @@ smoothscroll.polyfill();
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$backToTop = () => {
+  window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  window.parent.postMessage("backToTop", "http://kimchikrunch.seoulspice.com");
+};
+
 new Vue({
   store,
   render: h => h(App)
