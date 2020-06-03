@@ -26,6 +26,7 @@ export default {
     Dropdown
   },
   computed: {
+    activeComponent: sync("activeComponent"),
     date: sync("order/date"),
     instructions() {
       if (this.type === "delivery") {
@@ -54,7 +55,14 @@ export default {
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0))
     };
   },
-  name: "OrderSchedule"
+  name: "OrderSchedule",
+  watch: {
+    time(val) {
+      if (val) {
+        this.activeComponent = "OrderMenu";
+      }
+    }
+  }
 };
 </script>
 

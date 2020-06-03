@@ -14,7 +14,8 @@ export default {
   components: {
     OrderType,
     OrderLocation: () => import("@/views/OrderLocation"),
-    OrderSchedule: () => import("@/views/OrderSchedule")
+    OrderSchedule: () => import("@/views/OrderSchedule"),
+    OrderMenu: () => import("@/views/OrderMenu")
   },
   computed: {
     activeComponent: sync("activeComponent")
