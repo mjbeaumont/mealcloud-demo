@@ -34,5 +34,9 @@
     @apply bg-white text-black;
 }
 
+.p-dropdown-item:hover {
+    @apply bg-gray-700 text-white;
+}
+
 
 @tailwind utilities;
