@@ -24,11 +24,14 @@
 import { sync } from "vuex-pathify";
 export default {
   computed: {
-    type: sync("order/type")
+    type: sync("order/type"),
+    activeComponent: sync("activeComponent")
   },
   methods: {
     setType(val) {
       this.type = val;
+      this.activeComponent =
+        val === "delivery" ? "OrderSchedule" : "OrderLocation";
     }
   },
   name: "OrderType"

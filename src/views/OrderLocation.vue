@@ -22,7 +22,8 @@ import { sync } from "vuex-pathify";
 import locations from "@/data/locations";
 export default {
   computed: {
-    location: sync("order/location")
+    location: sync("order/location"),
+    activeComponent: sync("activeComponent")
   },
   data() {
     return {
@@ -32,6 +33,7 @@ export default {
   methods: {
     setLocation(val) {
       this.location = val;
+      this.activeComponent = "OrderSchedule";
     }
   },
   name: "OrderLocation"
