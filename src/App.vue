@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="container pt-12 pb-4 px-2">
-    <component :is="activeComponent"></component>
+    <transition name="component-fade" mode="out-in">
+      <component :is="activeComponent" :key="activeComponent.name"></component>
+    </transition>
   </div>
 </template>
 
@@ -42,5 +44,13 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
+}
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

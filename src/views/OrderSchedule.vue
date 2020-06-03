@@ -2,15 +2,17 @@
   <div class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen">
     <h2 class="question-text">{{ instructions }}</h2>
     <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
-    <Dropdown
-      :options="times"
-      optionLabel="name"
-      v-if="date"
-      class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 md:py-2 text-4xl"
-      :placeholder="placeholder"
-      scrollHeight="350px"
-      v-model="time"
-    ></Dropdown>
+    <transition name="component-fade">
+      <Dropdown
+        :options="times"
+        optionLabel="name"
+        v-if="date"
+        class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 md:py-2 text-4xl"
+        :placeholder="placeholder"
+        scrollHeight="350px"
+        v-model="time"
+      ></Dropdown>
+    </transition>
   </div>
 </template>
 
