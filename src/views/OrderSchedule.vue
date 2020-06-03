@@ -7,7 +7,7 @@
         :options="times"
         optionLabel="name"
         v-if="date"
-        class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 md:py-2 text-4xl"
+        class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 py-2 text-3xl"
         :placeholder="placeholder"
         scrollHeight="350px"
         v-model="time"
