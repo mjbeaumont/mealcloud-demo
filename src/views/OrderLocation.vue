@@ -36,6 +36,9 @@ export default {
       this.activeComponent = "OrderSchedule";
     }
   },
+  mounted() {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  },
   name: "OrderLocation"
 };
 </script>

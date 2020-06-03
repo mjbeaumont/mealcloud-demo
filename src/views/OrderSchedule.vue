@@ -1,11 +1,15 @@
 <template>
-  <div class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen">
+  <div
+    class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen"
+    id="schedule"
+  >
     <h2 class="question-text">{{ instructions }}</h2>
     <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
     <transition name="component-fade">
       <Dropdown
         :options="times"
         optionLabel="name"
+        id="time-selector"
         v-if="date"
         class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 py-2 text-3xl"
         :placeholder="placeholder"
@@ -56,6 +60,25 @@ export default {
       partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0))
     };
+  },
+  mounted() {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+    const observer = new MutationObserver(mutationsList => {
+      for (let mutation of mutationsList) {
+        if (
+          mutation.addedNodes.length > 0 &&
+          mutation.addedNodes[0].id === "time-selector"
+        ) {
+          document
+            .getElementById("time-selector")
+            .scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    });
+
+    observer.observe(document.getElementById("schedule"), {
+      childList: true
+    });
   },
   name: "OrderSchedule",
   watch: {

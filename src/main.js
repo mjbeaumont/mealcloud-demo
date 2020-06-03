@@ -2,6 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import "@/assets/css/tailwind.css";
+import smoothscroll from "smoothscroll-polyfill";
+
+smoothscroll.polyfill();
 
 Vue.config.productionTip = false;
 

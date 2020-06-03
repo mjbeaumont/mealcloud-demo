@@ -34,6 +34,9 @@ export default {
         val === "delivery" ? "OrderSchedule" : "OrderLocation";
     }
   },
+  mounted() {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  },
   name: "OrderType"
 };
 </script>
