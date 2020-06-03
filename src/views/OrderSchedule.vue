@@ -7,7 +7,7 @@
       optionLabel="name"
       v-if="date"
       class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 md:py-2 text-4xl"
-      placeholder="Select a Time"
+      :placeholder="placeholder"
       scrollHeight="350px"
       v-model="time"
     ></Dropdown>
@@ -16,9 +16,10 @@
 
 <script>
 import { sync, get } from "vuex-pathify";
-import times from "@/data/times";
+import { createFullTimeOptions, createPartialTimeOptions } from "@/data/times";
 import MCCalendar from "@/components/UI/MCCalendar/MCCalendar";
 import Dropdown from "primevue/dropdown";
+import * as dayjs from "dayjs";
 export default {
   components: {
     MCCalendar,
@@ -33,12 +34,24 @@ export default {
         return "When would you like to pickup your order?";
       }
     },
+    placeholder() {
+      return this.times.length ? "Please select a time" : "No times available";
+    },
     time: sync("order/time"),
+    times() {
+      if (this.date.isSame(this.partialTimeDate)) {
+        return createPartialTimeOptions();
+      } else if (this.date.isSame(this.noTimeDate)) {
+        return [];
+      }
+      return createFullTimeOptions();
+    },
     type: get("order/type")
   },
   data() {
     return {
-      times: times
+      partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
+      noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0))
     };
   },
   name: "OrderSchedule"
