@@ -23,7 +23,7 @@ export default {
     activeComponent: sync("activeComponent")
   },
   mounted() {
-    this.activeComponent = "OrderType";
+    this.activeComponent = "OrderLocation";
   },
   name: "App"
 };
