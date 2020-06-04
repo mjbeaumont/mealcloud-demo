@@ -2,7 +2,11 @@
   <div class="mx-auto flex flex-col items-center min-h-screen">
     <h2 class="question-text">{{ instructions }}</h2>
     <div class="w-full lg:w-1/2 px-4" id="schedule">
-      <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
+      <MCCalendar
+        :min-date="startDate"
+        :max-date="endDate"
+        v-model="date"
+      ></MCCalendar>
       <transition name="component-fade">
         <Dropdown
           :options="times"
@@ -58,7 +62,11 @@ export default {
   data() {
     return {
       partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
-      noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0))
+      noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0)),
+      startDate: new Date(),
+      endDate: dayjs(new Date())
+        .add(10, "day")
+        .toDate()
     };
   },
   mixins: [BackToTop],

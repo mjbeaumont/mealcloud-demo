@@ -2,8 +2,8 @@
   <a
     class="absolute inset-0 flex items-center justify-center text-xl md:text-2xl"
     @click.prevent="selectDate"
-    :disabled="outsideRange"
     :class="additionalClasses"
+    :disabled="outsideRange"
   >
     {{ contents }}
   </a>
@@ -31,14 +31,16 @@ export default {
     outsideRange() {
       return (
         (this.minimumDate && this.date.isBefore(this.minimumDate)) ||
-        (this.maximumDate && this.date.isAfter(this.maximumDate()))
+        (this.maximumDate && this.date.isAfter(this.maximumDate))
       );
     }
   },
   name: "MCCalendarDay",
   methods: {
     selectDate() {
-      this.$emit("choose", this.date);
+      if (!this.outsideRange) {
+        this.$emit("choose", this.date);
+      }
     }
   },
   props: {
