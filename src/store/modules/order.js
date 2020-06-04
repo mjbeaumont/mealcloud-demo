@@ -4,8 +4,7 @@ const state = () => {
   return {
     type: "",
     location: {},
-    date: null,
-    time: null
+    dateTime: null
   };
 };
 

@@ -11,6 +11,7 @@
         <Dropdown
           :options="times"
           optionLabel="name"
+          optionValue="code"
           id="time-selector"
           v-if="date"
           class="w-full font-bold mc-input mc-input-light mt-8 py-2 md:text-3xl"
@@ -37,7 +38,6 @@ export default {
   },
   computed: {
     activeComponent: sync("activeComponent"),
-    date: sync("order/date"),
     instructions() {
       if (this.type === "delivery") {
         return "When would like your order to be delivered?";
@@ -48,7 +48,6 @@ export default {
     placeholder() {
       return this.times.length ? "Please select a time" : "No times available";
     },
-    time: sync("order/time"),
     times() {
       if (this.date.isSame(this.partialTimeDate)) {
         return createPartialTimeOptions();
@@ -61,6 +60,8 @@ export default {
   },
   data() {
     return {
+      date: null,
+      time: null,
       partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0)),
       startDate: new Date(),
@@ -93,6 +94,15 @@ export default {
     time(val) {
       if (val) {
         setTimeout(() => {
+          const timeArray = val.split(":");
+          const dateTime = dayjs()
+            .year(this.date.year())
+            .month(this.date.month())
+            .date(this.date.date())
+            .hour(timeArray[0])
+            .minute(timeArray[1])
+            .second(0);
+          this.$store.set("order/dateTime", dateTime);
           this.activeComponent = "OrderMenu";
         }, 1000);
       }
