@@ -1,22 +1,21 @@
 <template>
-  <div
-    class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen"
-    id="schedule"
-  >
+  <div class="mx-auto flex flex-col items-center min-h-screen" id="schedule">
     <h2 class="question-text">{{ instructions }}</h2>
-    <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
-    <transition name="component-fade">
-      <Dropdown
-        :options="times"
-        optionLabel="name"
-        id="time-selector"
-        v-if="date"
-        class="w-full md:w-3/4 font-bold mc-input mc-input-light mt-8 py-2 text-3xl"
-        :placeholder="placeholder"
-        scrollHeight="350px"
-        v-model="time"
-      ></Dropdown>
-    </transition>
+    <div class="w-full lg:w-1/2 px-4">
+      <MCCalendar :min-date="new Date()" v-model="date"></MCCalendar>
+      <transition name="component-fade">
+        <Dropdown
+          :options="times"
+          optionLabel="name"
+          id="time-selector"
+          v-if="date"
+          class="w-full font-bold mc-input mc-input-light mt-8 py-2 md:text-3xl"
+          :placeholder="placeholder"
+          scrollHeight="350px"
+          v-model="time"
+        ></Dropdown>
+      </transition>
+    </div>
   </div>
 </template>
 

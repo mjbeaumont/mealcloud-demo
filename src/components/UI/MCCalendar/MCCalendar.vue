@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto w-full md:w-3/4">
+  <div class="mx-auto w-full">
     <MCCalendarHeader
       :active-date="activeDate"
       :maximum-date="maximumDate"
