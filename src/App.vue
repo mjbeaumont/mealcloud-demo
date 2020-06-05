@@ -9,6 +9,7 @@
 <script>
 import OrderType from "@/views/OrderType";
 import { sync } from "vuex-pathify";
+import categories from "@/data/categories";
 
 export default {
   components: {
@@ -19,6 +20,9 @@ export default {
   },
   computed: {
     activeComponent: sync("activeComponent")
+  },
+  created() {
+    this.$store.set("category/categories", categories);
   },
   mounted() {
     this.activeComponent = "OrderLocation";

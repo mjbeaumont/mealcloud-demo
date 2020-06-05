@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import pathify, { make } from "vuex-pathify";
 import order from "./modules/order";
+import category from "./modules/category";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   state,
   mutations,
   modules: {
+    category,
     order
   },
   strict: process.env.NODE_ENV !== "production",
