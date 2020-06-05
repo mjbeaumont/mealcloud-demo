@@ -1,26 +1,29 @@
 <template>
-  <div class="mx-auto px-16 flex flex-col items-center min-h-screen">
+  <div class="mx-auto px-16 flex flex-col min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
-    <MenuNav :categories="parentCategories"></MenuNav>
+    <MenuNav :categories="parentCategories" class="mb-8 mx-auto"></MenuNav>
+    <div class="flex flex-col items-start">
+      <MenuCategory
+        v-for="category in parentCategories"
+        :key="category.id"
+        :category="category"
+        class="mb-16"
+      ></MenuCategory>
+    </div>
   </div>
 </template>
 
 <script>
+import { get } from "vuex-pathify";
 import BackToTop from "@/mixins/BackToTop";
 import MenuHeader from "@/components/Menu/MenuHeader";
 import MenuNav from "@/components/Menu/MenuNav";
-import categories from "@/data/categories";
+import MenuCategory from "@/components/Menu/MenuCategory";
+
 export default {
-  components: { MenuHeader, MenuNav },
+  components: { MenuHeader, MenuNav, MenuCategory },
   computed: {
-    parentCategories() {
-      return this.categories.filter(category => category.parent === 0);
-    }
-  },
-  data() {
-    return {
-      categories: categories
-    };
+    parentCategories: get("category/parentCategories")
   },
   mixins: [BackToTop],
   name: "OrderMenu"
