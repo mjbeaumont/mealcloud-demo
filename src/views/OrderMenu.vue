@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-16 flex flex-col min-h-screen">
+  <div class="mx-auto px-16 min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
     <MenuNav :categories="parentCategories" class="mb-12 mx-auto"></MenuNav>
     <div>

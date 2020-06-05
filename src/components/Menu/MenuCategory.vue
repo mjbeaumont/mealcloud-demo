@@ -1,6 +1,8 @@
 <template>
   <div class>
-    <h2 class="text-4xl font-bold border-b-4 border-green-400 uppercase mb-4">
+    <h2
+      class="text-4xl font-bold border-b-4 border-green-400 uppercase mb-4 pb-4"
+    >
       {{ category.name }}
     </h2>
     <MenuSubCategory
