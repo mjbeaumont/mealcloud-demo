@@ -3,7 +3,12 @@
     <h2 class="text-4xl font-bold border-b-4 border-green-400 uppercase mb-4">
       {{ category.name }}
     </h2>
-    <MenuSubCategory :subcategories="subcategories" />
+    <MenuSubCategory
+      v-for="subcategory in subcategories"
+      :key="subcategory.id"
+      :subcategory="subcategory"
+      class="mb-4"
+    />
   </div>
 </template>
 

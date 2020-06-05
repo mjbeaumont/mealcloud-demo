@@ -10,6 +10,7 @@
 import OrderType from "@/views/OrderType";
 import { sync } from "vuex-pathify";
 import categories from "@/data/categories";
+import products from "@/data/products";
 
 export default {
   components: {
@@ -23,6 +24,7 @@ export default {
   },
   created() {
     this.$store.set("category/categories", categories);
+    this.$store.set("product/products", products);
   },
   mounted() {
     this.activeComponent = "OrderLocation";
