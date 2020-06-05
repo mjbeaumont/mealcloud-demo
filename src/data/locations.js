@@ -1,6 +1,7 @@
 export default [
   {
     id: 1,
+    name: "9th St. NW",
     address: "1207 9th St., NW",
     city: "Washington",
     state: "DC",
@@ -12,6 +13,7 @@ export default [
   },
   {
     id: 2,
+    name: "Future Location",
     address: "Future Location",
     city: "Washington",
     state: "DC",

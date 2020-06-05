@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div :id="anchor">
     <h2
       class="text-4xl font-bold border-b-4 border-green-400 uppercase mb-4 pb-4"
     >
@@ -26,6 +26,7 @@ export default {
   },
   name: "MenuCategory",
   props: {
+    anchor: String,
     category: Object
   }
 };
