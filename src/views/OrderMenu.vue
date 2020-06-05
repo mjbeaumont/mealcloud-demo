@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-16 min-h-screen">
+  <div class="mx-auto px-0 lg:px-16 min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
     <div class="flex mb-12 justify-center">
       <button

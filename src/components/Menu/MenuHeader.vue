@@ -1,31 +1,35 @@
 <template>
-  <div class="w-full flex border-b border-white pb-4">
-    <div class="w-1/3 flex text-left">
+  <div
+    class="w-full flex flex-col md:flex-row border-b border-white pb-4 relative"
+  >
+    <div class="mt-24 xl:mt-0 md:w-1/2 xl:w-1/3 flex text-left mb-2">
       <p class="text-xl">
         <font-awesome-icon
           :icon="['fas', 'map-marker-alt']"
           size="lg"
+          class="hidden md:inline-block"
         ></font-awesome-icon>
-        <span class="mx-4">Pickup from {{ locationName }}</span>
+        <span class="mr-2 md:mx-4">Pickup from {{ locationName }}</span>
         <a @click.prevent="editLocation" class="cursor-pointer"
           ><font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
         ></a>
       </p>
     </div>
-    <div class="w-1/3 text-center">
+    <div class="md:mt-24 xl:mt-0 md:w-1/2 xl:w-1/3 xl:text-center">
       <p class="text-xl">
         <font-awesome-icon
           :icon="['fas', 'clock']"
           size="lg"
+          class="hidden md:inline-block"
         ></font-awesome-icon>
-        <span class="mx-4">{{ dateTime }}</span>
+        <span class="mr-2 md:mx-4">{{ dateTime }}</span>
         <a @click.prevent="editSchedule" class="cursor-pointer"
           ><font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
         ></a>
       </p>
     </div>
-    <div class="w-1/4 flex justify-end">
-      <p class="text-xl">
+    <div class="absolute top-0 right-0 mr-2 xl:w-1/3 xl:flex xl:justify-end">
+      <p class="text-3xl">
         <font-awesome-icon
           :icon="['fas', 'shopping-bag']"
           size="lg"
