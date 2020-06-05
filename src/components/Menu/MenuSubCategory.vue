@@ -3,13 +3,17 @@
     <h3 class="text-3xl mb-2 font-bold">
       {{ subcategory.name }}
     </h3>
-    <div class="flex flex-row flex-wrap justify-between">
-      <MenuProduct
+    <div class="flex flex-row flex-wrap justify-between -mx-2">
+      <div
+        class="px-2 w-full md:w-1/2 lg:w-1/3"
         v-for="product in products"
         :key="product.id"
-        :product="product"
-        class="product-card mb-8 md:mr-4 "
-      ></MenuProduct>
+      >
+        <MenuProduct
+          :product="product"
+          class="product-card mb-8 md:mr-4 "
+        ></MenuProduct>
+      </div>
     </div>
   </div>
 </template>
@@ -29,20 +33,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.product-card {
-  width: 98%;
-}
-
-@media screen and (min-width: 640px) {
-  .product-card {
-    width: 46%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .product-card {
-    width: 31%;
-  }
-}
-</style>
+<style scoped></style>
