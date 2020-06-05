@@ -1,15 +1,17 @@
 <template>
   <div class="flex justify-between">
-    <a class="cursor-pointer" @click.prevent="prev" :class="prevClass"
-      ><span
-        class="pi pi-arrow-left leading-relaxed text-2xl md:text-3xl"
-      ></span
+    <a
+      class="cursor-pointer text-2xl md:text-3xl"
+      @click.prevent="prev"
+      :class="prevClass"
+      ><font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon
     ></a>
     <div class="uppercase font-bold text-2xl md:text-3xl">{{ heading }}</div>
-    <a class="cursor-pointer" @click.prevent="next" :class="nextClass"
-      ><span
-        class="pi pi-arrow-right leading-relaxed text-2xl md:text-3xl"
-      ></span
+    <a
+      class="cursor-pointer text-2xl md:text-3xl"
+      @click.prevent="next"
+      :class="nextClass"
+      ><font-awesome-icon :icon="['fas', 'arrow-right']"></font-awesome-icon
     ></a>
   </div>
 </template>
