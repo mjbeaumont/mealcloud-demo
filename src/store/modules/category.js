@@ -11,7 +11,7 @@ const getters = {
     return state.categories.filter(category => category.parent === 0);
   },
   subCategories: state => parentId => {
-    return state.categories.filter(category => category.id === parentId);
+    return state.categories.filter(category => category.parent === parentId);
   }
 };
 

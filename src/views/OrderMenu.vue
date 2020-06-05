@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto px-16 flex flex-col min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
-    <MenuNav :categories="parentCategories" class="mb-8 mx-auto"></MenuNav>
+    <MenuNav :categories="parentCategories" class="mb-12 mx-auto"></MenuNav>
     <div class="flex flex-col items-start">
       <MenuCategory
         v-for="category in parentCategories"
