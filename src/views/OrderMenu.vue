@@ -1,16 +1,20 @@
 <template>
   <div class="mx-auto px-0 lg:px-16 min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
-    <div class="flex mb-12 justify-center">
-      <button
+    <div class="flex flex-wrap -mx-2 mb-8">
+      <div
+        class="px-2 w-1/2 md:w-1/3 xl:w-1/6 mb-4"
         v-for="category in parentCategories"
         :key="category.id"
-        :category="category"
-        class="mc-input mc-input-light md:text-2xl w-40 mx-2 py-2"
-        @click="nav(category.id)"
       >
-        {{ category.name }}
-      </button>
+        <button
+          :category="category"
+          class="mc-input mc-input-light md:text-2xl py-2 w-full"
+          @click="nav(category.id)"
+        >
+          {{ category.name }}
+        </button>
+      </div>
     </div>
 
     <div>
