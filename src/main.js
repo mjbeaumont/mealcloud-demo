@@ -11,12 +11,22 @@ import {
   faArrowRight,
   faArrowLeft,
   faClock,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faChevronDown,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // add fa-icons
-library.add(faShoppingBag, faArrowRight, faClock, faArrowLeft, faMapMarkerAlt);
+library.add(
+  faShoppingBag,
+  faArrowRight,
+  faClock,
+  faArrowLeft,
+  faMapMarkerAlt,
+  faChevronDown,
+  faEdit
+);
 
 // convert fa-icons to SVG
 dom.watch();

@@ -6,7 +6,10 @@
           :icon="['fas', 'map-marker-alt']"
           size="lg"
         ></font-awesome-icon>
-        <span class="ml-4">Pickup from {{ locationName }}</span>
+        <span class="mx-4">Pickup from {{ locationName }}</span>
+        <a @click.prevent="editLocation" class="cursor-pointer"
+          ><font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
+        ></a>
       </p>
     </div>
     <div class="w-1/3 text-center">
@@ -15,7 +18,10 @@
           :icon="['fas', 'clock']"
           size="lg"
         ></font-awesome-icon>
-        <span class="ml-4">{{ dateTime }}</span>
+        <span class="mx-4">{{ dateTime }}</span>
+        <a @click.prevent="editSchedule" class="cursor-pointer"
+          ><font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
+        ></a>
       </p>
     </div>
     <div class="w-1/4 flex justify-end">
@@ -46,6 +52,16 @@ export default {
         nextWeek: "dddd [at] h:mm A", // The next week ( Sunday at 2:30 AM )
         sameElse: "dddd MM/DD/YYYY [at] h:mm A" // Everything else ( 7/10/2011 )
       });
+    }
+  },
+  methods: {
+    editSchedule() {
+      this.$store.set("order/dateTime", null);
+      this.$store.set("activeComponent", "OrderSchedule");
+    },
+    editLocation() {
+      this.$store.set("order/location", {});
+      this.$store.set("activeComponent", "OrderLocation");
     }
   },
   name: "MenuHeader"

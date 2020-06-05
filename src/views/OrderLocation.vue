@@ -18,11 +18,12 @@
 </template>
 
 <script>
-import { sync } from "vuex-pathify";
+import { get, sync } from "vuex-pathify";
 import BackToTop from "@/mixins/BackToTop";
 import locations from "@/data/locations";
 export default {
   computed: {
+    dateTime: get("order/dateTime"),
     location: sync("order/location"),
     activeComponent: sync("activeComponent")
   },
@@ -34,7 +35,7 @@ export default {
   methods: {
     setLocation(val) {
       this.location = val;
-      this.activeComponent = "OrderSchedule";
+      this.activeComponent = this.dateTime ? "OrderMenu" : "OrderSchedule";
     }
   },
   mixins: [BackToTop],
