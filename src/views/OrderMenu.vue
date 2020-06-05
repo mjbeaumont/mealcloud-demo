@@ -1,12 +1,14 @@
 <template>
-  <div class="mx-auto max-w-screen-md flex flex-col items-center min-h-screen">
-    <h2 class="question-text">Menu goes here.</h2>
+  <div class="mx-auto px-16 flex flex-col items-center min-h-screen">
+    <MenuHeader></MenuHeader>
   </div>
 </template>
 
 <script>
 import BackToTop from "@/mixins/BackToTop";
+import MenuHeader from "@/components/Menu/MenuHeader";
 export default {
+  components: { MenuHeader },
   mixins: [BackToTop],
   name: "OrderMenu"
 };
