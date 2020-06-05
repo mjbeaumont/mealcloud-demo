@@ -14,7 +14,7 @@
 }
 
 .question-text {
-    @apply leading-none font-bold mb-12 text-3xl;
+    @apply leading-none font-bold mb-12 text-3xl text-center;
 }
 
 @media screen and (min-width: 768px) {
