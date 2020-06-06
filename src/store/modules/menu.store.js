@@ -2,7 +2,6 @@ import { make } from "vuex-pathify";
 
 const defaultProduct = {
   productId: null,
-  cartId: null,
   name: "",
   description: "",
   qty: 1,

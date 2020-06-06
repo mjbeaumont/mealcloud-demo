@@ -16,7 +16,6 @@ export default {
     add() {
       this.$store.set("menu/customizeProduct", {
         productId: this.product.id,
-        cartId: null,
         name: this.product.name,
         description: this.product.description,
         price: this.product.price,
