@@ -10,6 +10,9 @@ const state = () => {
 const getters = {
   countProducts(state) {
     return state.products.length;
+  },
+  product: state => id => {
+    return state.products.find(product => id === product.productId);
   }
 };
 

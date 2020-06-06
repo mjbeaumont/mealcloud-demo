@@ -55,6 +55,10 @@ import InputNumber from "primevue/inputnumber";
 export default {
   components: { Dialog, InputNumber },
   computed: {
+    existingProduct() {
+      console.log(this.product.productId);
+      return this.$store.get("cart/product", this.product.productId);
+    },
     product: get("menu/product"),
     subtotal() {
       return this.editProduct.price * this.editProduct.qty;
@@ -71,19 +75,26 @@ export default {
       this.editProduct = {};
       this.customizing = false;
     },
+    setupEdit() {
+      this.editProduct = clone(this.product);
+      if (this.existingProduct) {
+        this.editProduct.qty = this.existingProduct.qty;
+        this.editProduct.requests = this.existingProduct.requests;
+      }
+    },
     updateCart() {
       this.$store.set("cart/setProduct!", this.editProduct);
       this.close();
     }
   },
   mounted() {
-    this.editProduct = clone(this.product);
+    this.setupEdit();
   },
   name: "MenuCustomize",
   watch: {
     customizing(val) {
       if (val) {
-        this.editProduct = clone(this.product);
+        this.setupEdit();
       }
     }
   }
