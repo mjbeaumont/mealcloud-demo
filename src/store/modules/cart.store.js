@@ -9,7 +9,7 @@ const state = () => {
 
 const getters = {
   countProducts(state) {
-    return state.products.length;
+    return state.products.reduce((carry, product) => carry + product.qty, 0);
   },
   product: state => id => {
     return state.products.find(product => id === product.productId);

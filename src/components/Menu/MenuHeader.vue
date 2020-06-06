@@ -36,6 +36,11 @@
             size="lg"
             class="text-green-400"
           ></font-awesome-icon>
+          <span
+            class="text-green-400 font-bold ml-2 text-xl"
+            v-if="countProducts > 0"
+            >{{ countProducts }}</span
+          >
         </a>
       </p>
     </div>
@@ -49,6 +54,7 @@ import Calendar from "dayjs/plugin/calendar";
 
 export default {
   computed: {
+    countProducts: get("cart/countProducts"),
     locationName: get("order/location@name"),
     dateTime() {
       dayjs.extend(Calendar);
