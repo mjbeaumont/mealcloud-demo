@@ -2,17 +2,21 @@ import { make } from "vuex-pathify";
 
 const state = () => {
   return {
-    open: true,
+    open: false,
     products: []
   };
 };
 
-const getters = {};
+const getters = {
+  countProducts(state) {
+    return state.products.length;
+  }
+};
 
 const mutations = {
   ...make.mutations(state),
   SET_PRODUCT(state, { product, index }) {
-    if (index) {
+    if (-1 !== index) {
       state.products[index] = product;
     } else {
       state.products.push(product);

@@ -72,7 +72,10 @@ export default {
       this.editProduct = {};
       this.customizing = false;
     },
-    updateCart() {}
+    updateCart() {
+      this.$store.set("cart/setProduct!", this.editProduct);
+      this.close();
+    }
   },
   mounted() {
     this.editProduct = clone(this.product);
