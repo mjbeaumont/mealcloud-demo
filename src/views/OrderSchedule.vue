@@ -53,6 +53,8 @@ export default {
         return createPartialTimeOptions();
       } else if (this.date.isSame(this.noTimeDate)) {
         return [];
+      } else if (this.date.isSame(this.today)) {
+        return createFullTimeOptions(this.startDate.getHours() + 1);
       }
       return createFullTimeOptions();
     },
@@ -62,6 +64,7 @@ export default {
     return {
       date: null,
       time: null,
+      today: dayjs().startOf("day"),
       partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0)),
       startDate: new Date(),
