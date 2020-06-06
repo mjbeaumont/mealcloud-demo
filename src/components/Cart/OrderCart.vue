@@ -24,6 +24,11 @@
           </div>
         </div>
       </div>
+      <button
+        class="bg-green-700 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
+      >
+        Checkout - {{ 80 | currency }}
+      </button>
     </div>
     <font-awesome-icon
       :icon="['fas', 'times']"
