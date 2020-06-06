@@ -3,7 +3,9 @@
     <div class="qty-column flex-shrink-0 self-start">{{ product.qty }} x</div>
     <div class="name-column flex-grow">{{ product.name }}</div>
     <div class="remove-link">
-      <button class="text-green-400 font-bold">Remove</button>
+      <button class="text-green-400 font-bold" @click.prevent="remove">
+        Remove
+      </button>
     </div>
     <div class="price-column self-start flex-shrink-0">
       {{ subtotal | currency }}
@@ -15,6 +17,11 @@ export default {
   computed: {
     subtotal() {
       return this.product.qty * this.product.price;
+    }
+  },
+  methods: {
+    remove() {
+      this.$store.set("cart/removeProduct!", this.product.productId);
     }
   },
   name: "CartProduct",

@@ -36,6 +36,10 @@ const actions = {
       product => product.productId === productToAdd.productId
     );
     commit("SET_PRODUCT", { product: productToAdd, index: existingIndex });
+  },
+  removeProduct({ state, commit }, id) {
+    const idx = state.products.findIndex(product => product.productId === id);
+    commit("REMOVE_PRODUCT", idx);
   }
 };
 
