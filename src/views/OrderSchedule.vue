@@ -48,6 +48,16 @@ export default {
     placeholder() {
       return this.times.length ? "Select a time" : "No times available";
     },
+    startDate() {
+      const now = new Date();
+      if (now.getHours() < 19) {
+        return now;
+      } else {
+        return dayjs(now)
+          .add(1, "day")
+          .toDate();
+      }
+    },
     times() {
       if (this.date.isSame(this.partialTimeDate)) {
         return createPartialTimeOptions();
@@ -67,7 +77,6 @@ export default {
       today: dayjs().startOf("day"),
       partialTimeDate: dayjs(new Date(2020, 5, 15, 0, 0, 0, 0)),
       noTimeDate: dayjs(new Date(2020, 5, 20, 0, 0, 0, 0)),
-      startDate: new Date(),
       endDate: dayjs(new Date())
         .add(10, "day")
         .toDate()
