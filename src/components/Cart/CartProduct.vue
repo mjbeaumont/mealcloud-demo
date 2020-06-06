@@ -3,8 +3,8 @@
     <div class="qty-column flex-shrink-0 self-start">{{ product.qty }} x</div>
     <div class="name-column flex-grow">{{ product.name }}</div>
     <div class="remove-link">
-      <button class="text-green-400 font-bold" @click.prevent="remove">
-        Remove
+      <button @click.prevent="remove">
+        <font-awesome-icon :icon="['fas', 'trash']"></font-awesome-icon>
       </button>
     </div>
     <div class="price-column self-start flex-shrink-0">
