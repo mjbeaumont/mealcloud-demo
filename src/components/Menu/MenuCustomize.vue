@@ -1,21 +1,20 @@
+<script src="../../../../invoicing/src/utils/functions.js"></script>
 <template>
   <Dialog
     :modal="true"
-    :visible.sync="display"
+    :visible.sync="customizing"
     class="w-full bg-white rounded-sm text-black p-4 pb-8 lg:w-3/4 max-w-screen-md"
     position="top"
-    ><div class="font-bold text-3xl mb-4">Product Name</div>
+    ><div class="font-bold text-3xl mb-4">{{ editProduct.name }}</div>
     <div class="text-l text-gray-700">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad atque
-      exercitationem quisquam ut? Architecto asperiores assumenda aut non
-      repellendus sint tenetur. Dolor dolorem dolorum magnam non officiis
-      recusandae soluta!
+      {{ editProduct.description }}
     </div>
     <div class="text-l text-gray-700">
       <p class="py-8 font-bold">Special Requests</p>
       <textarea
         class="border border-gray-700 w-full h-32 p-2"
         placeholder="Do you have any special requests?"
+        v-model="editProduct.requests"
       ></textarea>
     </div>
     <div class="pt-12 flex flex-col md:flex-row md:items-center">
@@ -26,7 +25,7 @@
           :step="1"
           :min="1"
           :max="20"
-          v-model="qty"
+          v-model="editProduct.qty"
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
           class="w-full"
@@ -35,8 +34,9 @@
       <div class="w-full flex justify-center">
         <button
           class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
+          @click="updateCart"
         >
-          <span class="font-bold">Add to Order</span> - $40.00
+          <span class="font-bold">Add to Order</span> - {{ subtotal }}
         </button>
       </div>
     </div>
@@ -48,24 +48,39 @@
 ></template>
 
 <script>
+import { get, sync } from "vuex-pathify";
+import { clone } from "@/utils/helpers";
 import Dialog from "primevue/dialog";
 import InputNumber from "primevue/inputnumber";
 export default {
   components: { Dialog, InputNumber },
+  computed: {
+    product: get("menu/product"),
+    subtotal: get("menu/subtotal"),
+    customizing: sync("menu/customizing")
+  },
   data() {
     return {
-      qty: 1
+      editProduct: {}
     };
   },
   methods: {
     close() {
-      this.$emit("close");
-    }
+      this.editProduct = {};
+      this.customizing = false;
+    },
+    updateCart() {}
+  },
+  mounted() {
+    this.editProduct = clone(this.product);
   },
   name: "MenuCustomize",
-  props: {
-    display: Boolean,
-    product: Object
+  watch: {
+    customizing(val) {
+      if (val) {
+        this.editProduct = clone(this.product);
+      }
+    }
   }
 };
 </script>
