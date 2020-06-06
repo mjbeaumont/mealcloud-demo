@@ -5,12 +5,12 @@
     class="cart w-full bg-white rounded-sm text-black p-4 pb-8 max-w-sm h-screen m-0"
     position="topright"
   >
-    <div v-if="false" class="pt-24">
+    <div v-if="!products.length" class="pt-24">
       <span class="font-bold text-gray-400 text-3xl mx-auto block text-center"
         >Your bag is empty</span
       >
     </div>
-    <div class="pt-16" v-if="true">
+    <div class="pt-16" v-if="products.length">
       <div class="font-bold text-2xl text-black pb-6">Your Order</div>
       <div
         class="border-b border-gray-400 py-4"
