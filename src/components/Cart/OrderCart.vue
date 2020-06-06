@@ -25,7 +25,7 @@
       <button
         class="bg-green-700 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
       >
-        Checkout - {{ 80 | currency }}
+        Checkout - {{ subtotal | currency }}
       </button>
     </div>
     <font-awesome-icon
@@ -44,7 +44,8 @@ export default {
   components: { CartProduct, Dialog },
   computed: {
     open: sync("cart/open"),
-    products: get("cart/products")
+    products: get("cart/products"),
+    subtotal: get("cart/subtotal")
   },
   methods: {
     close() {

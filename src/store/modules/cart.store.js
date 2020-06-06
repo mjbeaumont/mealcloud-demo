@@ -13,6 +13,12 @@ const getters = {
   },
   product: state => id => {
     return state.products.find(product => id === product.productId);
+  },
+  subtotal(state) {
+    return state.products.reduce(
+      (carry, product) => carry + product.price * product.qty,
+      0
+    );
   }
 };
 
