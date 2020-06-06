@@ -2,7 +2,7 @@
   <Dialog
     :modal="true"
     :visible.sync="display"
-    class="w-full bg-white rounded-sm text-black p-4"
+    class="w-full bg-white rounded-sm text-black p-4 pb-8 lg:w-3/4 max-w-screen-md"
     position="top"
     ><div class="font-bold text-3xl mb-4">Product Name</div>
     <div class="text-l text-gray-700">
@@ -18,8 +18,8 @@
         placeholder="Do you have any special requests?"
       ></textarea>
     </div>
-    <div class="pt-12 flex flex-col">
-      <div class="w-3/4 mx-auto mb-8">
+    <div class="pt-12 flex flex-col md:flex-row md:items-center">
+      <div class="w-3/4 mx-auto mb-8 md:mb-0 md:w-1/2">
         <input-number
           showButtons
           buttonLayout="horizontal"
@@ -34,7 +34,7 @@
       </div>
       <div class="w-full flex justify-center">
         <button
-          class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l"
+          class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
         >
           <span class="font-bold">Add to Order</span> - $40.00
         </button>
