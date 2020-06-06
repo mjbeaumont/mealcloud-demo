@@ -14,6 +14,7 @@
         class="border border-gray-700 w-full h-32 p-2"
         placeholder="Do you have any special requests?"
         v-model="editProduct.requests"
+        tabindex="-1"
       ></textarea>
     </div>
     <div class="pt-12 flex flex-col md:flex-row md:items-center">

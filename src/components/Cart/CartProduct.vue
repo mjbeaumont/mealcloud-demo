@@ -7,7 +7,7 @@
       }}</a>
     </div>
     <div class="remove-link">
-      <button @click.prevent="remove">
+      <button @click.prevent="remove" tabindex="-1">
         <font-awesome-icon :icon="['fas', 'trash']"></font-awesome-icon>
       </button>
     </div>
