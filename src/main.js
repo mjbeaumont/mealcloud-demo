@@ -13,7 +13,8 @@ import {
   faClock,
   faMapMarkerAlt,
   faChevronDown,
-  faEdit
+  faEdit,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -25,7 +26,8 @@ library.add(
   faArrowLeft,
   faMapMarkerAlt,
   faChevronDown,
-  faEdit
+  faEdit,
+  faTimes
 );
 
 // convert fa-icons to SVG

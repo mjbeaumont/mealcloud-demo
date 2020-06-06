@@ -40,8 +40,12 @@
         </button>
       </div>
     </div>
-  </Dialog></template
->
+    <font-awesome-icon
+      :icon="['fas', 'times']"
+      class="text-2xl absolute top-0 right-0 mt-4 mr-4"
+      @click="close"
+    ></font-awesome-icon> </Dialog
+></template>
 
 <script>
 import Dialog from "primevue/dialog";
@@ -52,6 +56,11 @@ export default {
     return {
       qty: 1
     };
+  },
+  methods: {
+    close() {
+      this.$emit("close");
+    }
   },
   name: "MenuCustomize",
   props: {

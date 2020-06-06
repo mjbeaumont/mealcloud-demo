@@ -26,7 +26,10 @@
         class="mb-16"
       ></MenuCategory>
     </div>
-    <MenuCustomize :display="true"></MenuCustomize>
+    <MenuCustomize
+      :display="customizing"
+      @close="customizing = false"
+    ></MenuCustomize>
   </div>
 </template>
 
@@ -41,6 +44,11 @@ export default {
   components: { MenuHeader, MenuCategory, MenuCustomize },
   computed: {
     parentCategories: get("category/parentCategories")
+  },
+  data() {
+    return {
+      customizing: false
+    };
   },
   methods: {
     anchor(id) {
