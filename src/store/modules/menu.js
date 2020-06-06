@@ -17,11 +17,7 @@ const state = () => {
   };
 };
 
-const getters = {
-  subtotal(state) {
-    return state.product.qty * state.product.price;
-  }
-};
+const getters = {};
 
 const mutations = make.mutations(state);
 

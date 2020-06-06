@@ -3,7 +3,9 @@
     <div class="border border-white rounded overflow-hidden shadow-lg">
       <div class="font-bold text-xl px-6 py-4">{{ product.name }}</div>
       <div class="px-6 py-2">{{ product.description }}</div>
-      <div class="font-bold px-6 py-2 text-right">{{ product.price }}</div>
+      <div class="font-bold px-6 py-2 text-right">
+        {{ product.price | currency }}
+      </div>
     </div>
   </a>
 </template>

@@ -45,6 +45,12 @@ Vue.prototype.$backToTop = () => {
   window.parent.postMessage("backToTop", "http://kimchikrunch.seoulspice.com");
 };
 
+// create currency display filter
+Vue.filter("currency", function(value) {
+  if (!value || isNaN(value)) return "";
+  return "$" + Number.parseFloat(value).toFixed(2);
+});
+
 Vue.config.productionTip = false;
 
 new Vue({

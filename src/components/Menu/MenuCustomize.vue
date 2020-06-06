@@ -36,7 +36,8 @@
           class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
           @click="updateCart"
         >
-          <span class="font-bold">Add to Order</span> - {{ subtotal }}
+          <span class="font-bold">Add to Order</span> -
+          {{ subtotal | currency }}
         </button>
       </div>
     </div>
@@ -56,7 +57,9 @@ export default {
   components: { Dialog, InputNumber },
   computed: {
     product: get("menu/product"),
-    subtotal: get("menu/subtotal"),
+    subtotal() {
+      return this.editProduct.price * this.editProduct.qty;
+    },
     customizing: sync("menu/customizing")
   },
   data() {
