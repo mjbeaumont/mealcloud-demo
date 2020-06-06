@@ -1,4 +1,3 @@
-<script src="../../../../invoicing/src/utils/functions.js"></script>
 <template>
   <Dialog
     :modal="true"
