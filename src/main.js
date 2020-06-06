@@ -15,7 +15,8 @@ import {
   faChevronDown,
   faEdit,
   faTimes,
-  faTrash
+  faTrash,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -29,7 +30,8 @@ library.add(
   faChevronDown,
   faEdit,
   faTimes,
-  faTrash
+  faTrash,
+  faCheckCircle
 );
 
 // convert fa-icons to SVG
