@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col md:flex-row border-b border-white pb-4 relative"
+    class="w-full flex flex-col md:flex-row border-b border-white pb-4 relative sticky top-0 bg-black"
   >
     <div class="mt-24 xl:mt-0 md:w-1/2 xl:w-1/3 flex text-left mb-2">
       <p class="text-xl">
