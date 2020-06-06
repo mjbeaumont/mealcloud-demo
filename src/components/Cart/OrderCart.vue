@@ -18,6 +18,9 @@
         :key="product.productId"
       >
         <CartProduct :product="product" />
+        <div v-if="product.requests" class="pt-2 text-sm text-gray-700">
+          "{{ product.requests }}"
+        </div>
       </div>
       <button
         class="bg-green-700 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
