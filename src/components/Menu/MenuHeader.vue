@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col md:flex-row border-b border-white pb-4 relative sticky top-0 bg-black"
+    class="w-full flex flex-col md:flex-row border-b border-white py-4 relative sticky top-0 bg-black z-10"
   >
     <div class="mt-24 xl:mt-0 md:w-1/2 xl:w-1/3 flex text-left mb-2">
       <p class="text-xl">
@@ -28,7 +28,9 @@
         ></a>
       </p>
     </div>
-    <div class="absolute top-0 right-0 mr-2 xl:w-1/3 xl:flex xl:justify-end">
+    <div
+      class="absolute top-0 right-0 mt-2 mr-2 xl:w-1/3 xl:flex xl:justify-end"
+    >
       <p class="text-3xl">
         <a @click.prevent="openCart" class="cursor-pointer">
           <font-awesome-icon
