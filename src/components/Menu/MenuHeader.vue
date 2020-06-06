@@ -30,11 +30,13 @@
     </div>
     <div class="absolute top-0 right-0 mr-2 xl:w-1/3 xl:flex xl:justify-end">
       <p class="text-3xl">
-        <font-awesome-icon
-          :icon="['fas', 'shopping-bag']"
-          size="lg"
-          class="text-green-400"
-        ></font-awesome-icon>
+        <a @click.prevent="openCart" class="cursor-pointer">
+          <font-awesome-icon
+            :icon="['fas', 'shopping-bag']"
+            size="lg"
+            class="text-green-400"
+          ></font-awesome-icon>
+        </a>
       </p>
     </div>
   </div>
@@ -67,6 +69,9 @@ export default {
     editLocation() {
       this.$store.set("order/location", {});
       this.$store.set("activeComponent", "OrderLocation");
+    },
+    openCart() {
+      this.$store.set("cart/open", true);
     }
   },
   name: "MenuHeader"

@@ -27,6 +27,7 @@
       ></MenuCategory>
     </div>
     <MenuCustomize></MenuCustomize>
+    <OrderCart></OrderCart>
   </div>
 </template>
 
@@ -35,10 +36,11 @@ import { get } from "vuex-pathify";
 import BackToTop from "@/mixins/BackToTop";
 import MenuHeader from "@/components/Menu/MenuHeader";
 import MenuCategory from "@/components/Menu/MenuCategory";
-import MenuCustomize from "../components/Menu/MenuCustomize";
+import MenuCustomize from "@/components/Menu/MenuCustomize";
+import OrderCart from "@/components/Cart/OrderCart";
 
 export default {
-  components: { MenuHeader, MenuCategory, MenuCustomize },
+  components: { MenuHeader, MenuCategory, MenuCustomize, OrderCart },
   computed: {
     parentCategories: get("category/parentCategories")
   },
