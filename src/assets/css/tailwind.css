@@ -94,5 +94,8 @@
     @apply w-10 h-10;
 }
 
-
+.cart.p-dialog {
+    margin: 0!important;
+    max-height: 100vh!important;
+}
 @tailwind utilities;

@@ -2,7 +2,7 @@
   ><Dialog
     :modal="true"
     :visible.sync="open"
-    class="w-full bg-white rounded-sm text-black p-4 pb-8 max-w-sm h-screen"
+    class="cart w-full bg-white rounded-sm text-black p-4 pb-8 max-w-sm h-screen m-0"
     position="topright"
   >
     <div v-if="!products.length" class="pt-24">
