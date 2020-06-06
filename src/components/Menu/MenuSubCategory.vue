@@ -5,14 +5,11 @@
     </h3>
     <div class="flex flex-row flex-wrap justify-between -mx-2">
       <div
-        class="px-2 w-full md:w-1/2 lg:w-1/3"
+        class="px-2 mb-4 w-full md:w-1/2 lg:w-1/3"
         v-for="product in products"
         :key="product.id"
       >
-        <MenuProduct
-          :product="product"
-          class="product-card mb-8 md:mr-4 "
-        ></MenuProduct>
+        <MenuProduct :product="product"></MenuProduct>
       </div>
     </div>
   </div>
