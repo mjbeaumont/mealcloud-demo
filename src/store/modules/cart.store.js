@@ -33,7 +33,7 @@ const mutations = {
 const actions = {
   setProduct({ state, commit }, productToAdd) {
     const existingIndex = state.products.findIndex(
-      product => product.cartId === productToAdd.cartId
+      product => product.productId === productToAdd.productId
     );
     commit("SET_PRODUCT", { product: productToAdd, index: existingIndex });
   }
