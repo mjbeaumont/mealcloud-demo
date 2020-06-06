@@ -26,6 +26,7 @@
         class="mb-16"
       ></MenuCategory>
     </div>
+    <MenuCustomize :display="true"></MenuCustomize>
   </div>
 </template>
 
@@ -34,9 +35,10 @@ import { get } from "vuex-pathify";
 import BackToTop from "@/mixins/BackToTop";
 import MenuHeader from "@/components/Menu/MenuHeader";
 import MenuCategory from "@/components/Menu/MenuCategory";
+import MenuCustomize from "../components/Menu/MenuCustomize";
 
 export default {
-  components: { MenuHeader, MenuCategory },
+  components: { MenuHeader, MenuCategory, MenuCustomize },
   computed: {
     parentCategories: get("category/parentCategories")
   },
