@@ -11,18 +11,13 @@
       >
     </div>
     <div class="pt-16" v-if="true">
-      <div class="font-bold text-2xl text-black pb-8">Your Order</div>
-      <div class="border-b border-gray-400 pb-4">
-        <div class="grid w-full product-list">
-          <div class="qty-column flex-shrink-0 self-start">1 x</div>
-          <div class="name-column flex-grow">Product Name</div>
-          <div class="remove-link">
-            <button class="text-green-400 font-bold">Remove</button>
-          </div>
-          <div class="price-column self-start flex-shrink-0">
-            {{ 40 | currency }}
-          </div>
-        </div>
+      <div class="font-bold text-2xl text-black pb-6">Your Order</div>
+      <div
+        class="border-b border-gray-400 py-4"
+        v-for="product in products"
+        :key="product.productId"
+      >
+        <CartProduct :product="product" />
       </div>
       <button
         class="bg-green-700 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
@@ -40,8 +35,10 @@
 <script>
 import { get, sync } from "vuex-pathify";
 import Dialog from "primevue/dialog";
+import CartProduct from "./CartProduct";
+
 export default {
-  components: { Dialog },
+  components: { CartProduct, Dialog },
   computed: {
     open: sync("cart/open"),
     products: get("cart/products")
@@ -55,40 +52,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.product-list {
-  grid-template-rows: auto auto auto;
-  grid-template-columns: auto 1fr auto;
-  grid-column-gap: 20px;
-}
-
-.qty-column {
-  grid-row: 2 / auto;
-  grid-column: 1 / auto;
-}
-
-.name-column {
-  flex-basis: 100%;
-  grid-row: 2 / auto;
-  grid-column: 2 / auto;
-}
-
-.remove-link {
-  grid-area: 3 / 2 / auto / auto;
-}
-
-.price-column {
-  grid-row: 2 / auto;
-  grid-column: 3 / auto;
-}
-
-.border-row {
-  grid-column-start: 1;
-  grid-column-end: -1;
-  margin-right: -16px;
-  margin-left: 0px;
-  margin-bottom: -16px;
-  margin-top: 15px;
-  grid-row: -1 / auto;
-}
-</style>
+<style scoped></style>
