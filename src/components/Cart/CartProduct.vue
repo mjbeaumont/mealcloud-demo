@@ -1,7 +1,11 @@
 <template>
   <div class="grid w-full product-list">
     <div class="qty-column flex-shrink-0 self-start">{{ product.qty }} x</div>
-    <div class="name-column flex-grow">{{ product.name }}</div>
+    <div class="name-column flex-grow">
+      <a @click.prevent="edit" class="text-green-400 cursor-pointer">{{
+        product.name
+      }}</a>
+    </div>
     <div class="remove-link">
       <button @click.prevent="remove">
         <font-awesome-icon :icon="['fas', 'trash']"></font-awesome-icon>
@@ -20,6 +24,17 @@ export default {
     }
   },
   methods: {
+    edit() {
+      this.$store.set("cart/open", false);
+      this.$store.set("menu/customizeProduct", {
+        productId: this.product.productId,
+        name: this.product.name,
+        description: this.product.description,
+        price: this.product.price,
+        qty: this.product.qty,
+        requests: this.product.requests
+      });
+    },
     remove() {
       this.$store.set("cart/removeProduct!", this.product.productId);
     }
