@@ -35,7 +35,7 @@
           class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
           @click="updateCart"
         >
-          <span class="font-bold">Add to Order</span> -
+          <span class="font-bold">{{ buttonText }}</span> -
           {{ subtotal | currency }}
         </button>
       </div>
@@ -55,8 +55,10 @@ import InputNumber from "primevue/inputnumber";
 export default {
   components: { Dialog, InputNumber },
   computed: {
+    buttonText() {
+      return this.existingProduct ? "Update Order" : "Add To Order";
+    },
     existingProduct() {
-      console.log(this.product.productId);
       return this.$store.get("cart/product", this.product.productId);
     },
     product: get("menu/product"),
