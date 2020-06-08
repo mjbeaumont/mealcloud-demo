@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-0 md:-mt-8 lg:px-16 min-h-screen">
+  <div class="mx-auto px-0 lg:px-16 min-h-screen">
     <MenuHeader class="mb-8"></MenuHeader>
     <div>
       <MenuCategory
