@@ -14,7 +14,7 @@ export default {
     additionalClasses() {
       let className = this.outsideRange ? "text-gray-800" : "cursor-pointer";
       if (this.isSelected) {
-        className += " bg-green-400 font-bold ";
+        className += " bg-primary font-bold ";
       } else {
         className += " bg-white bg-opacity-50";
       }
