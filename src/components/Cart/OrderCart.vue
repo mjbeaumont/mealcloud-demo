@@ -23,7 +23,7 @@
         </div>
       </div>
       <button
-        class="bg-green-700 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
+        class="bg-primary px-8 py-2 text-white text-xl rounded mt-8 font-bold"
       >
         Checkout - {{ subtotal | currency }}
       </button>

@@ -33,7 +33,7 @@
       </div>
       <div class="w-full flex justify-center md:justify-end">
         <button
-          class="bg-green-400 border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
+          class="bg-primary text-white border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
           @click="updateCart"
         >
           <span class="font-bold">{{ buttonText }}</span> -
