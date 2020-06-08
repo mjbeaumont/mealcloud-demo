@@ -83,11 +83,10 @@
 .p-inputnumber {
     display: flex;
     align-items: center;
-    @apply border border-gray-700 rounded-full;
 }
 
 .p-inputnumber input {
-    @apply w-16 h-12 mx-4 text-center text-xl;
+    @apply w-16 h-12 mx-4 text-center text-xl border border-gray-700;
 }
 
 .p-inputnumber-buttons-horizontal .p-inputnumber-button-up, .p-inputnumber-buttons-horizontal .p-inputnumber-button-down {
