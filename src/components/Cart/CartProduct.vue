@@ -2,9 +2,7 @@
   <div class="grid w-full product-list">
     <div class="qty-column flex-shrink-0 self-start">{{ product.qty }} x</div>
     <div class="name-column flex-grow">
-      <a @click.prevent="edit" class="text-green-400 cursor-pointer">{{
-        product.name
-      }}</a>
+      <a @click.prevent="edit" class="cursor-pointer">{{ product.name }}</a>
     </div>
     <div class="remove-link">
       <button @click.prevent="remove" tabindex="-1">

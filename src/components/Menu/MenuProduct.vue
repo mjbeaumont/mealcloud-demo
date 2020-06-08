@@ -8,7 +8,7 @@
       </div>
       <font-awesome-icon
         :icon="['fas', 'check-circle']"
-        class="text-green-400 absolute top-0 right-0 mt-4 mr-4 text-xl"
+        class="absolute top-0 right-0 mt-4 mr-4 text-xl"
         v-if="inCart"
         title="This product is currently in your bag."
       ></font-awesome-icon>

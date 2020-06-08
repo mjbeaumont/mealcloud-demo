@@ -7,7 +7,7 @@
         <font-awesome-icon
           :icon="['fas', 'map-marker-alt']"
           size="lg"
-          class="hidden md:inline-block text-green-400"
+          class="hidden md:inline-block text-red-700"
         ></font-awesome-icon>
         <span class="mr-2 md:mx-4">Pickup from {{ locationName }}</span>
         <a @click.prevent="editLocation" class="cursor-pointer"
@@ -20,7 +20,7 @@
         <font-awesome-icon
           :icon="['fas', 'clock']"
           size="lg"
-          class="hidden md:inline-block text-green-400"
+          class="hidden md:inline-block"
         ></font-awesome-icon>
         <span class="mr-2 md:mx-4">{{ dateTime }}</span>
         <a @click.prevent="editSchedule" class="cursor-pointer"
@@ -34,13 +34,10 @@
           <font-awesome-icon
             :icon="['fas', 'shopping-bag']"
             size="lg"
-            class="text-green-400"
           ></font-awesome-icon>
-          <span
-            class="text-green-400 font-bold ml-2 text-xl"
-            v-if="countProducts > 0"
-            >{{ countProducts }}</span
-          >
+          <span class="font-bold ml-2 text-xl" v-if="countProducts > 0">{{
+            countProducts
+          }}</span>
         </a>
       </p>
     </div>
