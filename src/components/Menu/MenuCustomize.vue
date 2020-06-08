@@ -33,8 +33,9 @@
       </div>
       <div class="w-full flex justify-center md:justify-end">
         <button
-          class="bg-primary text-white border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
+          class="bg-primary hover:bg-secondary transition-colors duration-200 text-white border border-gray-700 px-6 text-sm rounded w-3/4 py-4 text-l md:text-xl"
           @click="updateCart"
+          tabindex="-1"
         >
           <span class="font-bold">{{ buttonText }}</span> -
           {{ subtotal | currency }}

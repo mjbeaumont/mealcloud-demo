@@ -2,7 +2,11 @@
 @tailwind components;
 
 .mc-input {
-    @apply bg-white bg-opacity-50 text-2xl;
+    @apply bg-white bg-opacity-50 text-2xl transition-colors duration-200;
+}
+
+.mc-input:hover {
+    @apply bg-opacity-75;
 }
 
 .mc-input-light {
