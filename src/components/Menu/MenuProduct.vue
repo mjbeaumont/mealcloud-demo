@@ -6,7 +6,9 @@
       <div class="h-full w-full transition-opacity duration-200 menu-overlay">
         <div class="z-10 text-white text-opacity-100">
           <div class="font-bold text-xl px-6 py-4">{{ product.name }}</div>
-          <div class="px-6 py-2">{{ product.description }}</div>
+          <div class="px-6 py-2">
+            {{ product.description }}
+          </div>
           <div class="font-bold px-6 py-2 text-right">
             {{ product.price | currency }}
           </div>
