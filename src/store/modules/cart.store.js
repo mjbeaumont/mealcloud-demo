@@ -1,4 +1,5 @@
 import { make } from "vuex-pathify";
+import Vue from "vue";
 
 const state = () => {
   return {
@@ -26,7 +27,7 @@ const mutations = {
   ...make.mutations(state),
   SET_PRODUCT(state, { product, index }) {
     if (-1 !== index) {
-      state.products[index] = product;
+      Vue.set(state.products, index, product);
     } else {
       state.products.push(product);
     }
