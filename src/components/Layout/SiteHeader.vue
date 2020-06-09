@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-primary h-12 lg:h-16 w-full fixed top-0 left-0 flex flex-wrap">
+  <div
+    class="bg-primary h-12 lg:h-16 w-full fixed top-0 left-0 flex flex-wrap z-50"
+  >
     <div class="w-full lg:w-1/4 h-full flex items-center justify-start">
       <button
         @click.prevent="toggleMobile"
