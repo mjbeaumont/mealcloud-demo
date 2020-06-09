@@ -14,7 +14,7 @@
           optionValue="code"
           id="time-selector"
           v-if="date"
-          class="w-full font-bold mc-input mc-input-light mt-8 py-2 text-xl md:text-3xl text-center"
+          class="w-full font-bold mc-input mc-input-light mt-8 py-2 mb-24 text-xl md:text-3xl text-center"
           :placeholder="placeholder"
           scrollHeight="350px"
           v-model="time"
