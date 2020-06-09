@@ -1,9 +1,9 @@
 <template>
   <footer
-    class="footer flex justify-center items-center bg-black h-12 fixed w-full bottom-0 font-bold uppercase text-lg -ml-2"
+    class="footer flex justify-center items-center bg-black h-16 lg:h-12 fixed w-full bottom-0 font-bold uppercase text-lg -ml-2"
   >
-    <ul>
-      <li class="pr-1 inline-block align-middle">
+    <ul class="text-xs lg:text-lg tracking-tight">
+      <li class="pr-1 lg:inline-block align-middle hidden">
         <a href="https://www.instagram.com/unconventionaldiner">
           <font-awesome-icon
             :icon="['fab', 'instagram']"
@@ -30,7 +30,7 @@
         </a>
       </li>
       <li
-        class="px-1 border-l border-white pl-4 inline-block align-middle hover:text-primary"
+        class="px-1 pb-2 lg:pb-0 lg:border-l lg:border-white lg:pl-4 block lg:inline-block align-middle hover:text-primary"
       >
         <a
           target="_blank"
@@ -39,7 +39,7 @@
           >1207 9TH ST., NW, WASHINGTON, DC 20001</a
         >
       </li>
-      <li class="px-1 border-l border-white inline-block align-middle">
+      <li class="px-1 lg:border-l lg:border-white inline-block align-middle">
         <a href="tel:202-847-0122">202.847.0122</a>
       </li>
       <li class="px-1 border-l border-white inline-block align-middle">
@@ -67,5 +67,6 @@ body {
 
 .footer {
   font-family: "helvetica neue", Helvetica, Roboto, Arial, sans-serif;
+  border-top: 1px solid #cacaca;
 }
 </style>
