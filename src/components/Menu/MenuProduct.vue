@@ -2,6 +2,7 @@
   <a @click.prevent="add" class="cursor-pointer">
     <div
       class="bg-no-repeat bg-cover bg-center border border-white rounded overflow-hidden shadow-lg relative menu-item"
+      :style="{ backgroundImage: 'url(' + backgroundImage + ')' }"
     >
       <div class="h-full w-full transition-opacity duration-200 menu-overlay">
         <div class="z-10 text-white text-opacity-100">
@@ -25,8 +26,14 @@
 </template>
 
 <script>
+import { getRandomInt } from "../../utils/helpers";
+
 export default {
   computed: {
+    backgroundImage() {
+      const filename = "meal-" + getRandomInt(1, 7) + ".jpg";
+      return require("@/assets/" + filename);
+    },
     inCart() {
       return this.$store.get("cart/product", this.product.id);
     }
@@ -52,7 +59,6 @@ export default {
 
 <style scoped>
 .menu-item {
-  background-image: url("~@/assets/meal.jpg");
   position: relative;
 }
 
