@@ -58,7 +58,6 @@ smoothscroll.polyfill();
 // add global method to scroll back to top of page
 Vue.prototype.$backToTop = () => {
   window.scroll({ top: 0, left: 0 });
-  window.parent.postMessage("backToTop", "http://kimchikrunch.seoulspice.com");
 };
 
 // create currency display filter
