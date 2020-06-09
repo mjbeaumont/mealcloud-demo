@@ -3,9 +3,7 @@
     <div
       class="bg-no-repeat bg-cover bg-center border border-white rounded overflow-hidden shadow-lg relative menu-item"
     >
-      <div
-        class="h-full w-full bg-black opacity-75 hover:opacity-50 transition-opacity duration-200"
-      >
+      <div class="h-full w-full transition-opacity duration-200 menu-overlay">
         <div class="z-10 text-white text-opacity-100">
           <div class="font-bold text-xl px-6 py-4">{{ product.name }}</div>
           <div class="px-6 py-2">{{ product.description }}</div>
@@ -54,5 +52,9 @@ export default {
 .menu-item {
   background-image: url("~@/assets/meal.jpg");
   position: relative;
+}
+
+.menu-overlay {
+  background: rgba(0, 0, 0, 0.5);
 }
 </style>
