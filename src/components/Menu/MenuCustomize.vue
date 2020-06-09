@@ -20,6 +20,7 @@
         :class="requestClass"
         placeholder="Do you have any special requests?"
         v-model="editProduct.requests"
+        tabindex="-1"
       ></textarea>
     </div>
     <div class="pt-12 flex flex-col md:flex-row md:items-center">
@@ -34,6 +35,8 @@
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
           class="w-full"
+          tabindex="-1"
+          id="menu-quantity-input"
         ></input-number>
         <input type="hidden" tabindex="1" />
       </div>

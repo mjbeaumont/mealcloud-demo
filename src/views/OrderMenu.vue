@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-0 lg:px-16 min-h-screen">
+  <div class="mx-auto px-0 lg:px-16 min-h-screen" id="order-menu">
     <MenuHeader class="mb-8"></MenuHeader>
     <div>
       <MenuCategory
@@ -38,6 +38,27 @@ export default {
         behavior: "smooth"
       });
     }
+  },
+  mounted() {
+    const observer = new MutationObserver(mutationsList => {
+      for (let mutation of mutationsList) {
+        if (
+          mutation.addedNodes.length > 0 &&
+          "querySelectorAll" in mutation.addedNodes[0]
+        ) {
+          const buttons = mutation.addedNodes[0].querySelectorAll(
+            ".p-inputnumber-button"
+          );
+          buttons.forEach(button => {
+            button.blur();
+          });
+        }
+      }
+    });
+
+    observer.observe(document.getElementById("order-menu"), {
+      childList: true
+    });
   },
   mixins: [BackToTop],
   name: "OrderMenu"
