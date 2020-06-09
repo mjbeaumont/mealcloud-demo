@@ -1,9 +1,10 @@
 <template>
-  <div id="app" class="pt-24 pb-4 px-2">
+  <div id="app" class="pt-24 pb-16 px-2">
     <SiteHeader />
     <transition name="component-fade" mode="out-in">
       <component :is="activeComponent" :key="activeComponent.name"></component>
     </transition>
+    <SiteFooter />
   </div>
 </template>
 
@@ -13,11 +14,13 @@ import { sync } from "vuex-pathify";
 import categories from "@/data/categories";
 import products from "@/data/products";
 import SiteHeader from "@/components/Layout/SiteHeader";
+import SiteFooter from "@/components/Layout/SiteFooter";
 
 export default {
   components: {
     OrderType,
     SiteHeader,
+    SiteFooter,
     OrderLocation: () => import("@/views/OrderLocation"),
     OrderSchedule: () => import("@/views/OrderSchedule"),
     OrderMenu: () => import("@/views/OrderMenu")

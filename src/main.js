@@ -19,6 +19,11 @@ import {
   faCheckCircle,
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitter,
+  faInstagram,
+  faFacebookSquare
+} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // add fa-icons
@@ -33,7 +38,10 @@ library.add(
   faTimes,
   faTrash,
   faCheckCircle,
-  faPlus
+  faPlus,
+  faInstagram,
+  faTwitter,
+  faFacebookSquare
 );
 
 // convert fa-icons to SVG
