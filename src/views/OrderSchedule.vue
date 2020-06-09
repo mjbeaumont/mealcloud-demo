@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto flex flex-col items-center min-h-screen">
     <h2 class="question-text">{{ instructions }}</h2>
-    <div class="w-full lg:w-1/2 px-4" id="schedule">
+    <div class="w-full lg:w-5/12 px-4" id="schedule">
       <MCCalendar
         :min-date="startDate"
         :max-date="endDate"

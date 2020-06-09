@@ -18,7 +18,7 @@
 }
 
 .question-text {
-    @apply leading-none font-bold mb-12 text-3xl text-center;
+    @apply leading-none font-thin mb-12 text-2xl text-center font-avenir;
 }
 
 @media screen and (min-width: 768px) {
@@ -26,7 +26,7 @@
         @apply text-4xl;
     }
     .mc-input {
-        @apply text-4xl;
+        @apply text-2xl;
     }
 }
 

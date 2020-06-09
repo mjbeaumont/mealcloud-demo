@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col-reverse md:flex-row border-b border-white py-4 relative"
+    class="w-full flex flex-col-reverse md:flex-row border-b border-white py-4 relative font-avenir"
   >
     <div class="md:w-1/2 xl:w-1/3 flex text-left mb-2">
       <p class="text-xl">

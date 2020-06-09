@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-3xl mb-2 font-bold">
+    <h3 class="text-3xl mb-2 font-light font-avenir">
       {{ subcategory.name }}
     </h3>
     <div class="flex flex-row flex-wrap justify-between -mx-2">

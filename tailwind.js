@@ -5,6 +5,9 @@ module.exports = {
       colors: {
         primary: "#1e988b",
         secondary: "#064c44"
+      },
+      fontFamily: {
+        avenir: ["Avenir Next", "serif"]
       }
     }
   },

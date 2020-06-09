@@ -2,7 +2,7 @@
   <div>
     <a @click.prevent="toggle" class="cursor-pointer">
       <h2
-        class="text-4xl font-bold border-b-4 border-white-400 uppercase mb-4 pb-4"
+        class="text-3xl border-b-4 border-white-400 uppercase mb-4 pb-4 font-avenir"
       >
         {{ category.name }}
       </h2>
