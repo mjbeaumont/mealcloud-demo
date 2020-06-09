@@ -16,7 +16,8 @@ import {
   faEdit,
   faTimes,
   faTrash,
-  faCheckCircle
+  faCheckCircle,
+  faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -31,7 +32,8 @@ library.add(
   faEdit,
   faTimes,
   faTrash,
-  faCheckCircle
+  faCheckCircle,
+  faPlus
 );
 
 // convert fa-icons to SVG

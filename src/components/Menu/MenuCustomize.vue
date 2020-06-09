@@ -9,9 +9,15 @@
       {{ editProduct.description }}
     </div>
     <div class="text-l text-gray-700">
-      <p class="py-8 font-bold">Special Requests</p>
+      <p class="py-8 font-bold">
+        <a @click.prevent="toggleRequest" class="cursor-pointer"
+          ><font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon> Add
+          Special Request</a
+        >
+      </p>
       <textarea
         class="border border-gray-700 w-full h-32 p-2"
+        :class="requestClass"
         placeholder="Do you have any special requests?"
         v-model="editProduct.requests"
       ></textarea>
@@ -64,6 +70,9 @@ export default {
       return this.$store.get("cart/product", this.product.productId);
     },
     product: get("menu/product"),
+    requestClass() {
+      return this.showRequests ? "block" : "hidden";
+    },
     subtotal() {
       return this.editProduct.price * this.editProduct.qty;
     },
@@ -71,13 +80,15 @@ export default {
   },
   data() {
     return {
-      editProduct: {}
+      editProduct: {},
+      showRequests: false
     };
   },
   methods: {
     close() {
       this.editProduct = {};
       this.customizing = false;
+      this.showRequests = false;
     },
     setupEdit() {
       this.editProduct = clone(this.product);
@@ -85,6 +96,9 @@ export default {
         this.editProduct.qty = this.existingProduct.qty;
         this.editProduct.requests = this.existingProduct.requests;
       }
+    },
+    toggleRequest() {
+      this.showRequests = !this.showRequests;
     },
     updateCart() {
       this.$store.set("cart/setProduct!", this.editProduct);
