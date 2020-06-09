@@ -119,12 +119,4 @@ export default {
 };
 </script>
 
-<style>
-.p-inputnumber-buttons-horizontal .p-inputnumber-button-up .p-button-icon {
-  margin-right: 10px;
-}
-
-.p-inputnumber-buttons-horizontal .p-inputnumber-button-down .p-button-icon {
-  margin-left: 10px;
-}
-</style>
+<style></style>
