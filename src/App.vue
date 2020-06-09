@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="pt-24 pb-16 px-2">
+  <div id="app" class="pt-24 pb-16npm ru px-2">
     <SiteHeader />
     <transition name="component-fade" mode="out-in">
       <component :is="activeComponent" :key="activeComponent.name"></component>

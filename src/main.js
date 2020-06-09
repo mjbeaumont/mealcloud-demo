@@ -17,7 +17,8 @@ import {
   faTimes,
   faTrash,
   faCheckCircle,
-  faPlus
+  faPlus,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faTwitter,
@@ -41,7 +42,8 @@ library.add(
   faPlus,
   faInstagram,
   faTwitter,
-  faFacebookSquare
+  faFacebookSquare,
+  faBars
 );
 
 // convert fa-icons to SVG
