@@ -23,11 +23,19 @@
         </div>
       </div>
       <button
-        class="bg-primary hover:bg-secondary transition-colors duration-200 px-8 py-2 text-white text-xl rounded mt-8 font-bold"
+        class="bg-primary hover:bg-secondary transition-colors duration-200 px-8 py-2 text-white text-xl rounded mt-8 font-bold block"
         tabindex="-1"
       >
         Checkout - {{ subtotal | currency }}
       </button>
+      <label class="inline-block text-xl mt-8">Gratuity:</label>
+      <Dropdown
+        v-model="tip"
+        :options="tipOptions"
+        optionLabel="name"
+        optionValue="code"
+        class="inline-block border border-black ml-4 py-2 pl-2 tip"
+      ></Dropdown>
     </div>
     <font-awesome-icon
       :icon="['fas', 'times']"
@@ -40,13 +48,41 @@
 import { get, sync } from "vuex-pathify";
 import Dialog from "primevue/dialog";
 import CartProduct from "./CartProduct";
+import Dropdown from "primevue/dropdown";
 
 export default {
-  components: { CartProduct, Dialog },
+  components: { CartProduct, Dialog, Dropdown },
   computed: {
     open: sync("cart/open"),
     products: get("cart/products"),
-    subtotal: get("cart/subtotal")
+    subtotal: get("cart/subtotal"),
+    tip: sync("cart/tip")
+  },
+  data() {
+    return {
+      tipOptions: [
+        { name: "5%", code: 0.05 },
+        { name: "10%", code: 0.1 },
+        { name: "15%", code: 0.15 },
+        { name: "20%", code: 0.2 },
+        { name: "25%", code: 0.25 }
+        /*{ name: "30%", code: 0.3 },
+        { name: "35%", code: 0.35 },
+        { name: "40%", code: 0.4 },
+        { name: "45%", code: 0.45 },
+        { name: "50%", code: 0.5 },
+        { name: "55%", code: 0.55 },
+        { name: "60%", code: 0.6 },
+        { name: "65%", code: 0.65 },
+        { name: "70%", code: 0.7 },
+        { name: "75%", code: 0.75 },
+        { name: "80%", code: 0.8 },
+        { name: "85%", code: 0.85 },
+        { name: "90%", code: 0.9 },
+        { name: "95%", code: 0.95 },
+        { name: "100%", code: 1 }*/
+      ]
+    };
   },
   methods: {
     close() {
@@ -57,4 +93,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.p-dropdown .p-dropdown-trigger {
+  padding-right: 6px;
+}
+.p-dropdown-items {
+  padding-left: 6px;
+  border: 1px solid #000;
+}
+.p-dialog-content {
+  height: 100vh;
+}
+</style>
