@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2 class="text-xl font-bold">Review and Complete Your Order</h2>
-    <p class="py-4 border-b border-gray-700">
+    <p class="py-8 border-b border-gray-700">
       Your order will be picked up from {{ locationName }} {{ dateTime }}
     </p>
-    <div class="py-4">
+    <div class="py-8 border-b border-gray-700">
       <h3 class="text-lg font-bold mb-4">
         Contact Information
       </h3>
@@ -37,7 +37,7 @@
         />
       </validated-input>
     </div>
-    <div class="py-4">
+    <div class="py-8 border-b border-gray-700">
       <h3 class="text-lg font-bold mb-4">
         Order Instructions
       </h3>
@@ -52,7 +52,7 @@
           v-model="utensils"
           class="mb-2"
         ></MCCheckbox>
-        <p class="py-8 font-bold">
+        <p class="mb-2 mt-4 font-bold">
           <a
             @click.prevent="showInstructions = !showInstructions"
             class="cursor-pointer"
@@ -67,6 +67,27 @@
           v-model="instructions"
           tabindex="-1"
         ></textarea>
+      </div>
+    </div>
+    <div class="py-8 border-b border-gray-700">
+      <h3 class="text-lg font-bold mb-4">
+        Payment Information
+      </h3>
+      <div
+        class="bg-white h-10 rounded p-4 text-sm sm:text-base relative"
+        id="card-element"
+      >
+        <iframe
+          frameborder="0"
+          allowtransparency="true"
+          scrolling="no"
+          class="absolute top-0 left-0 h-10"
+          name="__privateStripeFrame16"
+          allowpaymentrequest="true"
+          src="https://js.stripe.com/v3/elements-inner-card-709c45dfbe4aba3400395e54e4e911b1.html#style[base][color]=%2332325d&amp;style[base][fontSmoothing]=antialiased&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_TYooMQauvdEDq54NiTphI7jx&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fpayments%2Faccept-a-payment&amp;controllerId=__privateStripeController12"
+          title="Secure payment input frame"
+          style="border: none !important; margin: 0px !important; padding: 10px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important;"
+        ></iframe>
       </div>
     </div>
   </div>
