@@ -25,6 +25,7 @@
       <button
         class="bg-primary hover:bg-secondary transition-colors duration-200 px-8 py-2 text-white text-xl rounded mt-8 font-bold block"
         tabindex="-1"
+        @click.prevent="checkout"
       >
         Checkout - {{ subtotal | currency }}
       </button>
@@ -56,7 +57,8 @@ export default {
     open: sync("cart/open"),
     products: get("cart/products"),
     subtotal: get("cart/subtotal"),
-    tip: sync("cart/tip")
+    tip: sync("cart/tip"),
+    activeComponent: sync("activeComponent")
   },
   data() {
     return {
@@ -66,25 +68,13 @@ export default {
         { name: "15%", code: 0.15 },
         { name: "20%", code: 0.2 },
         { name: "25%", code: 0.25 }
-        /*{ name: "30%", code: 0.3 },
-        { name: "35%", code: 0.35 },
-        { name: "40%", code: 0.4 },
-        { name: "45%", code: 0.45 },
-        { name: "50%", code: 0.5 },
-        { name: "55%", code: 0.55 },
-        { name: "60%", code: 0.6 },
-        { name: "65%", code: 0.65 },
-        { name: "70%", code: 0.7 },
-        { name: "75%", code: 0.75 },
-        { name: "80%", code: 0.8 },
-        { name: "85%", code: 0.85 },
-        { name: "90%", code: 0.9 },
-        { name: "95%", code: 0.95 },
-        { name: "100%", code: 1 }*/
       ]
     };
   },
   methods: {
+    checkout() {
+      this.activeComponent = "OrderCheckout";
+    },
     close() {
       this.open = false;
     }

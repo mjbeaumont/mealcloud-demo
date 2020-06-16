@@ -4,7 +4,11 @@ const state = () => {
   return {
     type: "",
     location: {},
-    dateTime: null
+    dateTime: null,
+    name: "",
+    email: "",
+    phone: "",
+    instructions: ""
   };
 };
 
