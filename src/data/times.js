@@ -14,7 +14,7 @@ export const createFullTimeOptions = (startTime = null) => {
 
   if (startTime <= 19) {
     do {
-      options.push({ name: time.format("h:mm A"), code: time.format("h:mm") });
+      options.push({ name: time.format("h:mm A"), code: time.format("H:mm") });
       time = time.add(15, "minutes");
     } while (!time.isSame(endTime));
   } else {
