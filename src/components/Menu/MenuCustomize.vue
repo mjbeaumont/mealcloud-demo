@@ -11,7 +11,7 @@
     <div class="text-l text-gray-700">
       <p class="py-8 font-bold">
         <a @click.prevent="toggleRequest" class="cursor-pointer"
-          ><font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon> Add
+          ><font-awesome-icon :icon="requestIcon"></font-awesome-icon> Add
           Special Request</a
         >
       </p>
@@ -75,6 +75,9 @@ export default {
     product: get("menu/product"),
     requestClass() {
       return this.showRequests ? "block" : "hidden";
+    },
+    requestIcon() {
+      return this.showRequests ? ["fas", "minus"] : ["fas", "plus"];
     },
     subtotal() {
       return this.editProduct.price * this.editProduct.qty;

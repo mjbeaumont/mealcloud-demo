@@ -18,6 +18,7 @@ import {
   faTrash,
   faCheckCircle,
   faPlus,
+  faMinus,
   faBars
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -40,6 +41,7 @@ library.add(
   faTrash,
   faCheckCircle,
   faPlus,
+  faMinus,
   faInstagram,
   faTwitter,
   faFacebookSquare,
