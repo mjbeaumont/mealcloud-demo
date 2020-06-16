@@ -4,7 +4,6 @@ import Vue from "vue";
 const state = () => {
   return {
     open: false,
-    tip: 0.1,
     products: []
   };
 };
@@ -17,12 +16,10 @@ const getters = {
     return state.products.find(product => id === product.productId);
   },
   subtotal(state) {
-    let subtotal = state.products.reduce(
+    return state.products.reduce(
       (carry, product) => carry + product.price * product.qty,
       0
     );
-    subtotal += subtotal * state.tip;
-    return subtotal;
   }
 };
 

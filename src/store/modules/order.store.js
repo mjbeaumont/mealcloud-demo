@@ -8,7 +8,8 @@ const state = () => {
     name: "",
     email: "",
     phone: "",
-    instructions: ""
+    instructions: "",
+    gratuity: 0.1
   };
 };
 

@@ -31,8 +31,8 @@
       </button>
       <label class="inline-block text-xl mt-8">Gratuity:</label>
       <Dropdown
-        v-model="tip"
-        :options="tipOptions"
+        v-model="gratuity"
+        :options="gratuityOptions"
         optionLabel="name"
         optionValue="code"
         class="inline-block border border-black ml-4 py-2 pl-2 tip"
@@ -56,13 +56,13 @@ export default {
   computed: {
     open: sync("cart/open"),
     products: get("cart/products"),
-    subtotal: get("cart/subtotal"),
-    tip: sync("cart/tip"),
+    subtotal: get("order/cartSubtotal"),
+    gratuity: sync("order/gratuity"),
     activeComponent: sync("activeComponent")
   },
   data() {
     return {
-      tipOptions: [
+      gratuityOptions: [
         { name: "5%", code: 0.05 },
         { name: "10%", code: 0.1 },
         { name: "15%", code: 0.15 },
