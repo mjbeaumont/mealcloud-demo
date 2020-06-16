@@ -73,9 +73,38 @@
       <h3 class="text-lg font-bold mb-4">
         Payment Information
       </h3>
+      <div class="mt-4 mb-6 flex flex-wrap -mx-2">
+        <div class="px-2 w-1/2">
+          <button
+            class="mc-input mc-input-dark w-full py-2 hover:text-black"
+            @click="paymentMethod = 'card'"
+            :class="
+              paymentMethod === 'card'
+                ? 'bg-opacity-75 border border-black'
+                : 'text-gray-700'
+            "
+          >
+            Pay with Card
+          </button>
+        </div>
+        <div class="px-2 w-1/2">
+          <button
+            class="mc-input mc-input-dark w-full py-2 hover:text-black"
+            @click="paymentMethod = 'apple'"
+            :class="
+              paymentMethod === 'apple'
+                ? 'bg-opacity-75 border border-black'
+                : 'text-gray-700'
+            "
+          >
+            Apple Pay
+          </button>
+        </div>
+      </div>
       <div
         class="bg-white h-10 rounded p-4 text-sm sm:text-base relative"
         id="card-element"
+        v-if="paymentMethod === 'card'"
       >
         <iframe
           frameborder="0"
@@ -88,6 +117,14 @@
           title="Secure payment input frame"
           style="border: none !important; margin: 0px !important; padding: 10px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important;"
         ></iframe>
+      </div>
+      <div v-if="paymentMethod === 'apple'">
+        <button class="w-full bg-black text-white mt-2">
+          <font-awesome-icon
+            :icon="['fab', 'apple-pay']"
+            size="3x"
+          ></font-awesome-icon>
+        </button>
       </div>
     </div>
   </div>
@@ -129,7 +166,8 @@ export default {
     return {
       curbside: false,
       showInstructions: false,
-      utensils: true
+      utensils: true,
+      paymentMethod: "card"
     };
   },
   name: "OrderCheckout"

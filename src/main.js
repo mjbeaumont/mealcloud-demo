@@ -24,7 +24,8 @@ import {
 import {
   faTwitter,
   faInstagram,
-  faFacebookSquare
+  faFacebookSquare,
+  faApplePay
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -45,6 +46,7 @@ library.add(
   faInstagram,
   faTwitter,
   faFacebookSquare,
+  faApplePay,
   faBars
 );
 
