@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <ValidationObserver ref="contactForm">
-      <div>
+  <div class="w-full">
+    <ValidationObserver
+      ref="contactForm"
+      slim
+      class="w-full lg:flex lg:flex-no-wrap lg:max-w-screen-lg lg:justify-between mx-auto"
+    >
+      <div class="lg:w-7/12">
         <!-- left side desktop -->
         <h2 class="text-xl font-bold">Review and Complete Your Order</h2>
         <div class="py-8 border-b border-gray-700">
@@ -93,7 +97,7 @@
           <div class="mt-4 mb-6 flex flex-wrap -mx-2">
             <div class="px-2 w-1/2">
               <button
-                class="mc-input mc-input-dark w-full py-2 hover:text-black"
+                class="mc-input mc-input-dark text-xl md:text-2xl w-full py-2 hover:text-black"
                 @click="paymentMethod = 'card'"
                 :class="
                   paymentMethod === 'card'
@@ -106,7 +110,7 @@
             </div>
             <div class="px-2 w-1/2">
               <button
-                class="mc-input mc-input-dark w-full py-2 hover:text-black"
+                class="mc-input mc-input-dark text-xl md:text-2xl w-full py-2 hover:text-black"
                 @click="paymentMethod = 'apple'"
                 :class="
                   paymentMethod === 'apple'
@@ -145,7 +149,7 @@
           </div>
         </div>
       </div>
-      <div class="pt-4">
+      <div class="pt-4 lg:pt-0 lg:w-4/12">
         <!-- Right side desktop -->
         <div class="w-full border-b border-gray-700 pb-8">
           <h3 class="text-lg font-bold mb-4">
@@ -161,6 +165,9 @@
             :key="product.productId"
           >
             <checkout-product :product="product"></checkout-product>
+            <div v-if="product.requests" class="pt-2 text-sm text-gray-400">
+              "{{ product.requests }}"
+            </div>
           </div>
         </div>
         <div class="pt-8 w-full">
