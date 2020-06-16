@@ -167,6 +167,13 @@
             {{ total | currency }}
           </p>
         </div>
+        <button
+          class="bg-primary hover:bg-secondary transition-colors duration-200 px-8 py-2 text-white text-xl rounded mt-8 font-bold block mx-auto"
+          tabindex="-1"
+          @click.prevent="process"
+        >
+          Complete Order
+        </button>
       </div>
     </ValidationObserver>
   </div>
@@ -230,6 +237,9 @@ export default {
     edit() {
       this.$store.set("cart/open", false);
       this.activeComponent = "OrderMenu";
+    },
+    process() {
+      alert("Checkout!");
     }
   },
   name: "OrderCheckout",
