@@ -124,7 +124,7 @@
             ></iframe>
           </div>
           <div v-if="paymentMethod === 'apple'">
-            <button class="w-full bg-black text-white mt-2">
+            <button class="w-full bg-black text-white mt-2" @click="applePay">
               <font-awesome-icon
                 :icon="['fab', 'apple-pay']"
                 size="3x"
@@ -234,6 +234,9 @@ export default {
     };
   },
   methods: {
+    applePay() {
+      alert("Apple Pay!");
+    },
     edit() {
       this.$store.set("cart/open", false);
       this.activeComponent = "OrderMenu";
