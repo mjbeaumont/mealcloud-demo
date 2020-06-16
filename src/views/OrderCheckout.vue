@@ -135,17 +135,38 @@
       </div>
       <div class="pt-4">
         <!-- Right side desktop -->
-        <h3 class="text-lg font-bold mb-4">
-          Order Summary
-          <font-awesome-icon
-            :icon="['fas', 'edit']"
-            @click="edit"
-          ></font-awesome-icon>
-        </h3>
-        <div class="py-4" v-for="product in products" :key="product.productId">
-          <checkout-product :product="product"></checkout-product>
+        <div class="w-full border-b border-gray-700 pb-8">
+          <h3 class="text-lg font-bold mb-4">
+            Order Summary
+            <font-awesome-icon
+              :icon="['fas', 'edit']"
+              @click="edit"
+            ></font-awesome-icon>
+          </h3>
+          <div
+            class="py-4"
+            v-for="product in products"
+            :key="product.productId"
+          >
+            <checkout-product :product="product"></checkout-product>
+          </div>
         </div>
-        <div class="border-t border-gray-700 mt-8"></div>
+        <div class="pt-8 w-full">
+          <p v-if="tax > 0" class="w-full flex justify-between">
+            <span class="font-bold inline-block pr-8"
+              >Tax ({{ taxRate }}%):</span
+            >
+            {{ tax | currency }}
+          </p>
+          <p v-if="gratuity > 0" class="w-full flex justify-between">
+            <span class="font-bold">Gratuity ({{ gratuityRate }}%):</span>
+            {{ gratuity | currency }}
+          </p>
+          <p class="w-full flex justify-between">
+            <span class="font-bold">Total:</span>
+            {{ total | currency }}
+          </p>
+        </div>
       </div>
     </ValidationObserver>
   </div>
@@ -180,6 +201,8 @@ export default {
       });
     },
     email: sync("order/email"),
+    gratuity: get("order/gratuity"),
+    gratuityRate: get("order/gratuityRate"),
     instructions: sync("order/instructions"),
     instructionsClass() {
       return this.showInstructions ? "block" : "hidden";
@@ -190,7 +213,10 @@ export default {
     locationName: get("order/location@name"),
     name: sync("order/name"),
     phone: sync("order/phone"),
-    products: get("cart/products")
+    products: get("cart/products"),
+    tax: get("order/tax"),
+    taxRate: get("order/location@taxRate"),
+    total: get("order/total")
   },
   data() {
     return {

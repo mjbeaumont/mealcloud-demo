@@ -27,11 +27,11 @@
         tabindex="-1"
         @click.prevent="checkout"
       >
-        Checkout - {{ subtotal | currency }}
+        Checkout - {{ cartSubtotal | currency }}
       </button>
       <label class="inline-block text-xl mt-8">Gratuity:</label>
       <Dropdown
-        v-model="gratuity"
+        v-model="gratuityRate"
         :options="gratuityOptions"
         optionLabel="name"
         optionValue="code"
@@ -54,20 +54,24 @@ import Dropdown from "primevue/dropdown";
 export default {
   components: { CartProduct, Dialog, Dropdown },
   computed: {
+    activeComponent: sync("activeComponent"),
+    cartSubtotal() {
+      return this.gratuity + this.subtotal;
+    },
+    gratuity: get("order/gratuity"),
+    gratuityRate: sync("order/gratuityRate"),
     open: sync("cart/open"),
     products: get("cart/products"),
-    subtotal: get("order/cartSubtotal"),
-    gratuity: sync("order/gratuity"),
-    activeComponent: sync("activeComponent")
+    subtotal: get("cart/subtotal")
   },
   data() {
     return {
       gratuityOptions: [
-        { name: "5%", code: 0.05 },
-        { name: "10%", code: 0.1 },
-        { name: "15%", code: 0.15 },
-        { name: "20%", code: 0.2 },
-        { name: "25%", code: 0.25 }
+        { name: "5%", code: 5 },
+        { name: "10%", code: 10 },
+        { name: "15%", code: 15 },
+        { name: "20%", code: 20 },
+        { name: "25%", code: 25 }
       ]
     };
   },
