@@ -9,7 +9,8 @@
     <span :class="classes">
       <slot></slot>
       <span
-        class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+        class="font-medium inline-block py-1 px-2 tracking-wide bg-black text-yellow-400 text-sm mt-1 ml-1"
+        v-if="errors.length"
         >{{ errors[0] }}</span
       >
     </span>

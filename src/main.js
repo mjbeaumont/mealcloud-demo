@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
+import "./utils/rules";
 import "@/assets/css/tailwind.css";
 import "primevue/resources/primevue.min.css";
 import smoothscroll from "smoothscroll-polyfill";
