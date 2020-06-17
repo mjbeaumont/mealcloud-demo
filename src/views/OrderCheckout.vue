@@ -10,39 +10,7 @@
         <h2 class="text-xl font-bold">Review and Complete Your Order</h2>
         <CheckoutLocation></CheckoutLocation>
 
-        <div class="py-8 border-b border-gray-700">
-          <h3 class="text-lg font-bold mb-4">
-            Contact Information
-          </h3>
-          <div class="mb-2">
-            <validated-input rules="required">
-              <input
-                v-model="name"
-                type="text"
-                placeholder="Name"
-                class="text-sm sm:text-base relative w-full border rounded placeholder-gray-500 text-black focus:border-indigo-400 focus:outline-none p-2"
-              />
-            </validated-input>
-          </div>
-          <div class="mb-2">
-            <validated-input class="mb-2" rules="required|email">
-              <input
-                v-model="email"
-                type="text"
-                placeholder="Email Address"
-                class="text-sm sm:text-base relative w-full border rounded placeholder-gray-500 text-black focus:border-indigo-400 focus:outline-none p-2"
-              />
-            </validated-input>
-          </div>
-          <validated-input>
-            <input
-              v-model="phone"
-              type="text"
-              placeholder="Phone Number (optional)"
-              class="text-sm sm:text-base relative w-full border rounded placeholder-gray-500 text-black focus:border-indigo-400 focus:outline-none p-2"
-            />
-          </validated-input>
-        </div>
+        <CheckoutContact :email="email" :name="name" :phone="phone" />
         <div class="py-8 border-b border-gray-700">
           <h3 class="text-lg font-bold mb-4">
             Order Instructions
@@ -187,24 +155,22 @@
 
 <script>
 import { get, sync } from "vuex-pathify";
-
-import ValidatedInput from "@/components/UI/ValidatedInput/ValidatedInput";
 import MCCheckbox from "@/components/UI/MCCheckbox/MCCheckbox";
 import CheckoutProduct from "@/components/Checkout/CheckoutProduct";
 import CheckoutLocation from "@/components/Checkout/CheckoutLocation";
+import CheckoutContact from "@/components/Checkout/CheckoutContact";
 import { ValidationObserver } from "vee-validate";
 
 export default {
   components: {
+    CheckoutContact,
     CheckoutLocation,
     CheckoutProduct,
     MCCheckbox,
-    ValidatedInput,
     ValidationObserver
   },
   computed: {
     activeComponent: sync("activeComponent"),
-    email: sync("order/email"),
     gratuity: get("order/gratuity"),
     gratuityRate: get("order/gratuityRate"),
     instructions: sync("order/instructions"),
@@ -214,8 +180,7 @@ export default {
     instructionsIcon() {
       return this.showInstructions ? ["fas", "minus"] : ["fas", "plus"];
     },
-    name: sync("order/name"),
-    phone: sync("order/phone"),
+
     products: get("cart/products"),
     tax: get("order/tax"),
     taxRate: get("order/location@taxRate"),
@@ -241,14 +206,6 @@ export default {
       alert("Checkout!");
     }
   },
-  name: "OrderCheckout",
-  watch: {
-    phone(newValue) {
-      let x = newValue.replace(/\D/g, "").match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-      this.phone = !x[2]
-        ? x[1]
-        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-    }
-  }
+  name: "OrderCheckout"
 };
 </script>
