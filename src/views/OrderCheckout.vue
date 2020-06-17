@@ -15,25 +15,7 @@
       </div>
       <div class="pt-4 lg:pt-0 lg:w-4/12">
         <!-- Right side desktop -->
-        <div class="w-full border-b border-gray-700 pb-8">
-          <h3 class="text-lg font-bold mb-4">
-            Order Summary
-            <font-awesome-icon
-              :icon="['fas', 'edit']"
-              @click="edit"
-            ></font-awesome-icon>
-          </h3>
-          <div
-            class="py-4"
-            v-for="product in products"
-            :key="product.productId"
-          >
-            <checkout-product :product="product"></checkout-product>
-            <div v-if="product.requests" class="pt-2 text-sm text-gray-400">
-              "{{ product.requests }}"
-            </div>
-          </div>
-        </div>
+        <CheckoutCart></CheckoutCart>
         <div class="pt-8 w-full">
           <p v-if="tax > 0" class="w-full flex justify-between">
             <span class="font-bold inline-block pr-8"
@@ -65,19 +47,19 @@
 <script>
 import { get, sync } from "vuex-pathify";
 import { ValidationObserver } from "vee-validate";
-import CheckoutProduct from "@/components/Checkout/CheckoutProduct";
 import CheckoutLocation from "@/components/Checkout/CheckoutLocation";
 import CheckoutContact from "@/components/Checkout/CheckoutContact";
 import CheckoutInstructions from "@/components/Checkout/CheckoutInstructions";
 import CheckoutPayment from "@/components/Checkout/CheckoutPayment";
+import CheckoutCart from "./CheckoutCart";
 
 export default {
   components: {
+    CheckoutCart,
     CheckoutPayment,
     CheckoutInstructions,
     CheckoutContact,
     CheckoutLocation,
-    CheckoutProduct,
     ValidationObserver
   },
   computed: {
@@ -86,17 +68,12 @@ export default {
     gratuityRate: get("order/gratuityRate"),
     instructions: sync("order/instructions"),
 
-    products: get("cart/products"),
     tax: get("order/tax"),
     taxRate: get("order/location@taxRate"),
     total: get("order/total")
   },
 
   methods: {
-    edit() {
-      this.$store.set("cart/open", false);
-      this.activeComponent = "OrderMenu";
-    },
     process() {
       alert("Checkout!");
     }
