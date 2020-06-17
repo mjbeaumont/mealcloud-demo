@@ -9,42 +9,8 @@
         <!-- left side desktop -->
         <h2 class="text-xl font-bold">Review and Complete Your Order</h2>
         <CheckoutLocation></CheckoutLocation>
-
-        <CheckoutContact :email="email" :name="name" :phone="phone" />
-        <div class="py-8 border-b border-gray-700">
-          <h3 class="text-lg font-bold mb-4">
-            Order Instructions
-          </h3>
-          <div class="mb-4">
-            <MCCheckbox
-              label="Curbside Pickup"
-              v-model="curbside"
-              class="mb-2"
-            ></MCCheckbox>
-            <MCCheckbox
-              label="No Utensils. Let's Reduce Waste!"
-              v-model="utensils"
-              class="mb-2"
-            ></MCCheckbox>
-            <p class="mb-2 mt-4 font-bold">
-              <a
-                @click.prevent="showInstructions = !showInstructions"
-                class="cursor-pointer"
-                ><font-awesome-icon
-                  :icon="instructionsIcon"
-                ></font-awesome-icon>
-                Add Special Instructions</a
-              >
-            </p>
-            <textarea
-              class="border border-gray-700 placeholder-gray-500 w-full h-32 p-2"
-              :class="instructionsClass"
-              placeholder="e.g. Please include extra ketchup. "
-              v-model="instructions"
-              tabindex="-1"
-            ></textarea>
-          </div>
-        </div>
+        <CheckoutContact></CheckoutContact>
+        <CheckoutInstructions></CheckoutInstructions>
         <div class="py-8 border-b border-gray-700">
           <h3 class="text-lg font-bold mb-4">
             Payment Information
@@ -155,18 +121,18 @@
 
 <script>
 import { get, sync } from "vuex-pathify";
-import MCCheckbox from "@/components/UI/MCCheckbox/MCCheckbox";
+import { ValidationObserver } from "vee-validate";
 import CheckoutProduct from "@/components/Checkout/CheckoutProduct";
 import CheckoutLocation from "@/components/Checkout/CheckoutLocation";
 import CheckoutContact from "@/components/Checkout/CheckoutContact";
-import { ValidationObserver } from "vee-validate";
+import CheckoutInstructions from "@/components/Checkout/CheckoutInstructions";
 
 export default {
   components: {
+    CheckoutInstructions,
     CheckoutContact,
     CheckoutLocation,
     CheckoutProduct,
-    MCCheckbox,
     ValidationObserver
   },
   computed: {
@@ -174,12 +140,6 @@ export default {
     gratuity: get("order/gratuity"),
     gratuityRate: get("order/gratuityRate"),
     instructions: sync("order/instructions"),
-    instructionsClass() {
-      return this.showInstructions ? "block" : "hidden";
-    },
-    instructionsIcon() {
-      return this.showInstructions ? ["fas", "minus"] : ["fas", "plus"];
-    },
 
     products: get("cart/products"),
     tax: get("order/tax"),
@@ -188,9 +148,6 @@ export default {
   },
   data() {
     return {
-      curbside: false,
-      showInstructions: false,
-      utensils: true,
       paymentMethod: "card"
     };
   },

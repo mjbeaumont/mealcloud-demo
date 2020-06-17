@@ -9,7 +9,9 @@ const state = () => {
     email: "",
     phone: "",
     instructions: "",
-    gratuityRate: 10
+    gratuityRate: 10,
+    curbside: false,
+    utensils: true
   };
 };
 
