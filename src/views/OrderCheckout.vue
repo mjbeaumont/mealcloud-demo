@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <ValidationObserver
-      ref="contactForm"
+      ref="checkoutForm"
       slim
       class="w-full lg:flex lg:flex-no-wrap lg:max-w-screen-lg lg:justify-between mx-auto"
     >
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { sync } from "vuex-pathify";
+import { get, sync } from "vuex-pathify";
 import { ValidationObserver } from "vee-validate";
 import CheckoutLocation from "@/components/Checkout/CheckoutLocation";
 import CheckoutContact from "@/components/Checkout/CheckoutContact";
@@ -38,6 +38,7 @@ import CheckoutInstructions from "@/components/Checkout/CheckoutInstructions";
 import CheckoutPayment from "@/components/Checkout/CheckoutPayment";
 import CheckoutCart from "@/components/Checkout/CheckoutCart";
 import CheckoutTotals from "@/components/Checkout/CheckoutTotals";
+import axios from "axios";
 
 export default {
   components: {
@@ -50,11 +51,46 @@ export default {
     ValidationObserver
   },
   computed: {
-    activeComponent: sync("activeComponent")
+    activeComponent: sync("activeComponent"),
+    products: get("cart/products")
   },
   methods: {
-    process() {
-      alert("Checkout!");
+    async process() {
+      const isValid = await this.$refs.checkoutForm.validate();
+      if (isValid) {
+        const data = {
+          date: this.$store.get("order/dateTime").unix(),
+          location: this.$store.get("order/location@id"),
+          name: this.$store.get("order/name"),
+          email: this.$store.get("order/email"),
+          phone: this.$store.get("order/phone"),
+          curbside: this.$store.get("order/curbside"),
+          utensils: this.$store.get("order/utensils"),
+          instructions: this.$store.get("order/instructions"),
+          subtotal: this.$store.get("cart/subtotal"),
+          tax: this.$store.get("order/tax"),
+          gratuity: this.$store.get("order/gratuity"),
+          total: this.$store.get("order/total")
+        };
+        data.items = this.products.map(product => {
+          return {
+            description: product.name,
+            qty: product.qty,
+            price: product.price,
+            requests: product.requests
+          };
+        });
+
+        try {
+          await axios.post(
+            "https://mealcloud-portal.beaumontwebdev.com/order/process",
+            data
+          );
+          alert("Order Submitted Successfully");
+        } catch (err) {
+          alert("Error: " + err);
+        }
+      }
     }
   },
   name: "OrderCheckout"
