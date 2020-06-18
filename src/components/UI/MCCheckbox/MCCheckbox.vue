@@ -6,7 +6,7 @@
       <input
         type="checkbox"
         class="opacity-0 absolute"
-        :value="value"
+        :checked="value"
         @change="$emit('input', $event.target.checked)"
       />
       <svg
