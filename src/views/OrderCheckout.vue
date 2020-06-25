@@ -83,7 +83,7 @@ export default {
 
         try {
           await axios.post(
-            "https://mealcloud-portal.beaumontwebdev.com/order/process",
+            process.env.VUE_APP_API_BASE + "/api/order/process",
             data
           );
           alert("Order Submitted Successfully");
