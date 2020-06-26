@@ -5,6 +5,7 @@
       <component :is="activeComponent" :key="activeComponent.name"></component>
     </transition>
     <SiteFooter />
+    <MCLoading class="loading" />
   </div>
 </template>
 
@@ -15,12 +16,14 @@ import categories from "@/data/categories";
 import products from "@/data/products";
 import SiteHeader from "@/components/Layout/SiteHeader";
 import SiteFooter from "@/components/Layout/SiteFooter";
+import MCLoading from "@/components/UI/MCLoading/MCLoading";
 
 export default {
   components: {
     OrderType,
     SiteHeader,
     SiteFooter,
+    MCLoading,
     OrderLocation: () => import("@/views/OrderLocation"),
     OrderSchedule: () => import("@/views/OrderSchedule"),
     OrderMenu: () => import("@/views/OrderMenu"),
@@ -62,5 +65,12 @@ body {
 .component-fade-enter, .component-fade-leave-to
   /* .component-fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
