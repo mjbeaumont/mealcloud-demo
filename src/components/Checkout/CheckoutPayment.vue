@@ -31,25 +31,17 @@
         </button>
       </div>
     </div>
-    <div
-      class="bg-white h-10 rounded p-4 text-sm sm:text-base relative"
-      id="card-element"
-      v-if="paymentMethod === 'card'"
-    >
-      <iframe
-        frameborder="0"
-        allowtransparency="true"
-        scrolling="no"
-        class="absolute top-0 left-0 h-10"
-        name="__privateStripeFrame16"
-        allowpaymentrequest="true"
-        src="https://js.stripe.com/v3/elements-inner-card-709c45dfbe4aba3400395e54e4e911b1.html#style[base][color]=%2332325d&amp;style[base][fontSmoothing]=antialiased&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_TYooMQauvdEDq54NiTphI7jx&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fpayments%2Faccept-a-payment&amp;controllerId=__privateStripeController12"
-        title="Secure payment input frame"
-        style="border: none !important; margin: 0px !important; padding: 10px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important;"
-      ></iframe>
+    <div v-show="paymentMethod === 'card'">
+      <div id="card-payment" class="bg-white py-4 px-2 rounded"></div>
+      <span
+        class="font-medium inline-block py-1 px-2 tracking-wide bg-black text-yellow-400 text-sm mt-1 ml-1"
+        v-if="cardError"
+        >{{ cardError }}</span
+      >
     </div>
-    <div v-if="paymentMethod === 'apple'">
-      <button class="w-full bg-black text-white mt-2" @click="applePay">
+
+    <div v-show="paymentMethod === 'apple'">
+      <button class="w-full bg-black text-white mt-2 rounded" @click="applePay">
         <font-awesome-icon
           :icon="['fab', 'apple-pay']"
           size="3x"
@@ -59,17 +51,64 @@
   </div>
 </template>
 <script>
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
 export default {
+  async created() {
+    this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+    this.clientSecret = await this.getPaymentIntent();
+    this.createCardElement();
+  },
   data() {
     return {
-      paymentMethod: "card"
+      stripe: null,
+      clientSecret: "",
+      paymentMethod: "card",
+      card: null,
+      cardError: ""
     };
   },
   methods: {
     applePay() {
       alert("Apple Pay!");
+    },
+    createCardElement() {
+      const elements = this.stripe.elements();
+      const style = {
+        base: {
+          fontFamily: "Avenir, Helvetica, Arial, sans-serif",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "#a0aec0"
+          }
+        }
+      };
+      this.card = elements.create("card", style);
+      this.card.mount("#card-payment");
+      this.card.on("change", e => {
+        if (e.error) {
+          this.cardError = e.error.message;
+        }
+      });
+    },
+    async getPaymentIntent() {
+      const response = await axios.post(
+        process.env.VUE_APP_API_BASE + "/api/order/intent",
+        {
+          amount: this.$store.get("order/total")
+        }
+      );
+      return response.data.client_secret;
     }
   },
-  name: "CheckoutPayment"
+  name: "CheckoutPayment",
+  watch: {
+    paymentMethod(val) {
+      if (val === "card" && !this.card) {
+        this.createCardElement();
+      }
+    }
+  }
 };
 </script>
