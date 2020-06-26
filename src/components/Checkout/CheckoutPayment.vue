@@ -1,5 +1,5 @@
 <template>
-  <div class="py-8 border-b border-gray-700">
+  <div class="py-8 border-b border-gray-700" id="payment-section">
     <h3 class="text-lg font-bold mb-4">
       Payment Information
     </h3>
@@ -51,22 +51,22 @@
   </div>
 </template>
 <script>
-import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default {
   async created() {
     this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
     this.clientSecret = await this.getPaymentIntent();
-    this.createCardElement();
+    this.card = this.createCardElement();
   },
   data() {
     return {
-      stripe: null,
+      card: null,
+      cardError: "",
       clientSecret: "",
       paymentMethod: "card",
-      card: null,
-      cardError: ""
+      stripe: null
     };
   },
   methods: {
@@ -84,13 +84,33 @@ export default {
           }
         }
       };
-      this.card = elements.create("card", style);
-      this.card.mount("#card-payment");
-      this.card.on("change", e => {
+      const card = elements.create("card", style);
+      card.mount("#card-payment");
+      card.on("change", e => {
         if (e.error) {
           this.cardError = e.error.message;
+        } else {
+          this.cardError = "";
         }
       });
+      return card;
+    },
+    async doCharge() {
+      const payload = {};
+      const response = await this.stripe.confirmCardPayment(this.clientSecret, {
+        payment_method: {
+          card: this.card
+        }
+      });
+      if (response.error) {
+        this.cardError = response.error.message;
+        payload.success = false;
+      } else {
+        payload.success = true;
+        payload.id = response.paymentIntent.id;
+      }
+
+      this.$emit("payment", payload);
     },
     async getPaymentIntent() {
       const response = await axios.post(
@@ -103,7 +123,15 @@ export default {
     }
   },
   name: "CheckoutPayment",
+  props: {
+    charge: Boolean
+  },
   watch: {
+    charge(val) {
+      if (val) {
+        this.doCharge();
+      }
+    },
     paymentMethod(val) {
       if (val === "card" && !this.card) {
         this.createCardElement();

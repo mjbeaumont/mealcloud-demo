@@ -11,7 +11,7 @@
         <CheckoutLocation></CheckoutLocation>
         <CheckoutContact></CheckoutContact>
         <CheckoutInstructions></CheckoutInstructions>
-        <CheckoutPayment></CheckoutPayment>
+        <CheckoutPayment :charge="charge" @payment="complete"></CheckoutPayment>
       </div>
       <div class="pt-4 lg:pt-0 lg:w-4/12">
         <!-- Right side desktop -->
@@ -54,42 +54,61 @@ export default {
     activeComponent: sync("activeComponent"),
     products: get("cart/products")
   },
+  data() {
+    return {
+      charge: false
+    };
+  },
   methods: {
+    async complete(payload) {
+      if (payload.success) {
+        await this.send();
+      }
+      this.charge = false;
+      document.getElementById("payment-section").scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+    },
     async process() {
       const isValid = await this.$refs.checkoutForm.validate();
       if (isValid) {
-        const data = {
-          date: this.$store.get("order/dateTime").unix(),
-          location: this.$store.get("order/location@id"),
-          name: this.$store.get("order/name"),
-          email: this.$store.get("order/email"),
-          phone: this.$store.get("order/phone"),
-          curbside: this.$store.get("order/curbside"),
-          utensils: this.$store.get("order/utensils"),
-          instructions: this.$store.get("order/instructions"),
-          subtotal: this.$store.get("cart/subtotal"),
-          tax: this.$store.get("order/tax"),
-          gratuity: this.$store.get("order/gratuity"),
-          total: this.$store.get("order/total")
+        this.charge = true;
+      }
+    },
+    async send() {
+      const data = {
+        date: this.$store.get("order/dateTime").unix(),
+        location: this.$store.get("order/location@id"),
+        name: this.$store.get("order/name"),
+        email: this.$store.get("order/email"),
+        phone: this.$store.get("order/phone"),
+        curbside: this.$store.get("order/curbside"),
+        utensils: this.$store.get("order/utensils"),
+        instructions: this.$store.get("order/instructions"),
+        subtotal: this.$store.get("cart/subtotal"),
+        tax: this.$store.get("order/tax"),
+        gratuity: this.$store.get("order/gratuity"),
+        total: this.$store.get("order/total")
+      };
+      data.items = this.products.map(product => {
+        return {
+          description: product.name,
+          qty: product.qty,
+          price: product.price,
+          requests: product.requests
         };
-        data.items = this.products.map(product => {
-          return {
-            description: product.name,
-            qty: product.qty,
-            price: product.price,
-            requests: product.requests
-          };
-        });
+      });
 
-        try {
-          await axios.post(
-            process.env.VUE_APP_API_BASE + "/api/order/process",
-            data
-          );
-          alert("Order Submitted Successfully");
-        } catch (err) {
-          alert("Error: " + err);
-        }
+      try {
+        await axios.post(
+          process.env.VUE_APP_API_BASE + "/api/order/process",
+          data
+        );
+        alert("Order Submitted Successfully");
+      } catch (err) {
+        alert("Error: " + err);
       }
     }
   },
