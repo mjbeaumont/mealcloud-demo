@@ -51,6 +51,7 @@ export default {
     ValidationObserver
   },
   computed: {
+    loading: sync("loading"),
     activeComponent: sync("activeComponent"),
     products: get("cart/products")
   },
@@ -72,8 +73,13 @@ export default {
       });
     },
     async process() {
+      if (this.loading) {
+        return;
+      }
+
       const isValid = await this.$refs.checkoutForm.validate();
       if (isValid) {
+        this.loading = true;
         this.charge = true;
       }
     },
@@ -110,6 +116,8 @@ export default {
       } catch (err) {
         alert("Error: " + err);
       }
+
+      this.loading = false;
     }
   },
   name: "OrderCheckout"

@@ -52,9 +52,13 @@
 </template>
 <script>
 import axios from "axios";
+import { sync } from "vuex-pathify";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default {
+  computed: {
+    loading: sync("loading")
+  },
   async created() {
     this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
     this.clientSecret = await this.getPaymentIntent();
@@ -105,6 +109,7 @@ export default {
       if (response.error) {
         this.cardError = response.error.message;
         payload.success = false;
+        this.loading = false;
       } else {
         payload.success = true;
         payload.id = response.paymentIntent.id;
