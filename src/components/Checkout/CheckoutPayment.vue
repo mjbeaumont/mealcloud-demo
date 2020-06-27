@@ -60,7 +60,7 @@ export default {
     loading: sync("loading")
   },
   async created() {
-    this.stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+    this.stripe = await this.loadStripe();
     this.clientSecret = await this.getPaymentIntent();
     this.card = this.createCardElement();
   },
@@ -125,6 +125,11 @@ export default {
         }
       );
       return response.data.client_secret;
+    },
+    async loadStripe() {
+      if (!this.stripe) {
+        return await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+      }
     }
   },
   name: "CheckoutPayment",
