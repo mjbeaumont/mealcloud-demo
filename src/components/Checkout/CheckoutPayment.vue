@@ -31,7 +31,7 @@
         </button>
       </div>
     </div>
-    <div v-show="paymentMethod === 'card'">
+    <div>
       <div id="card-payment" class="bg-white py-4 px-2 rounded"></div>
       <span
         class="font-medium inline-block py-1 px-2 tracking-wide bg-black text-yellow-400 text-sm mt-1 ml-1"
@@ -40,7 +40,7 @@
       >
     </div>
 
-    <div v-show="paymentMethod === 'apple'">
+    <div>
       <div id="request-button"></div>
     </div>
   </div>
@@ -111,11 +111,11 @@ export default {
         currency: "usd",
         total: {
           label: "Order total",
-          amount: this.total,
-          requestPayerName: true,
-          requestPayerEmail: true,
-          requestPayerPhone: true
-        }
+          amount: this.total
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+        requestPayerPhone: true
       });
     },
     async doCharge() {
@@ -154,7 +154,7 @@ export default {
       this.card.mount("#card-payment");
       const result = await this.paymentRequest.canMakePayment();
       if (result) {
-        this.request.mount("request-button");
+        this.request.mount("#request-button");
       }
     }
   },
