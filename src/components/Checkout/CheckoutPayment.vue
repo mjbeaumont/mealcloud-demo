@@ -41,28 +41,27 @@
     </div>
 
     <div v-show="paymentMethod === 'apple'">
-      <button class="w-full bg-black text-white mt-2 rounded" @click="applePay">
-        <font-awesome-icon
-          :icon="['fab', 'apple-pay']"
-          size="3x"
-        ></font-awesome-icon>
-      </button>
+      <div id="request-button"></div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
-import { sync } from "vuex-pathify";
+import { get, sync } from "vuex-pathify";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default {
   computed: {
-    loading: sync("loading")
+    loading: sync("loading"),
+    total: get("order/total")
   },
   async created() {
     this.stripe = await this.loadStripe();
     this.clientSecret = await this.getPaymentIntent();
+    this.paymentRequest = this.createPaymentRequest();
     this.card = this.createCardElement();
+    this.request = this.createRequestElement();
+    await this.mountButtons();
   },
   data() {
     return {
@@ -70,7 +69,18 @@ export default {
       cardError: "",
       clientSecret: "",
       paymentMethod: "card",
-      stripe: null
+      paymentRequest: null,
+      request: null,
+      stripe: null,
+      cardStyle: {
+        base: {
+          fontFamily: "Avenir, Helvetica, Arial, sans-serif",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "#a0aec0"
+          }
+        }
+      }
     };
   },
   methods: {
@@ -79,17 +89,7 @@ export default {
     },
     createCardElement() {
       const elements = this.stripe.elements();
-      const style = {
-        base: {
-          fontFamily: "Avenir, Helvetica, Arial, sans-serif",
-          fontSize: "16px",
-          "::placeholder": {
-            color: "#a0aec0"
-          }
-        }
-      };
-      const card = elements.create("card", style);
-      card.mount("#card-payment");
+      const card = elements.create("card", this.cardStyle);
       card.on("change", e => {
         if (e.error) {
           this.cardError = e.error.message;
@@ -98,6 +98,25 @@ export default {
         }
       });
       return card;
+    },
+    createRequestElement() {
+      const elements = this.stripe.elements();
+      return elements.create("paymentRequestButton", {
+        paymentRequest: this.paymentRequest
+      });
+    },
+    createPaymentRequest() {
+      return this.stripe.paymentRequest({
+        country: "US",
+        currency: "usd",
+        total: {
+          label: "Order total",
+          amount: this.total,
+          requestPayerName: true,
+          requestPayerEmail: true,
+          requestPayerPhone: true
+        }
+      });
     },
     async doCharge() {
       const payload = {};
@@ -129,6 +148,13 @@ export default {
     async loadStripe() {
       if (!this.stripe) {
         return await loadStripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY);
+      }
+    },
+    async mountButtons() {
+      this.card.mount("#card-payment");
+      const result = await this.paymentRequest.canMakePayment();
+      if (result) {
+        this.request.mount("request-button");
       }
     }
   },
