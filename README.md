@@ -35,4 +35,5 @@ You will need to copy .env.example to .env.development.local and provide your ow
 
 1. Add Unit/E2E tests
 2. Create order confirmation page
-3. Make it more clear that 
+3. Make it more clear that menu categories can be expanded
+4. Auto-open cart after adding item to cart
