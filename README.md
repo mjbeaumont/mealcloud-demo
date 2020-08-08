@@ -1,7 +1,9 @@
 # Restaurant Ordering App
 
 ## Introduction
-This is the front end code for a prototype of a re-usable restaurant ordering app. The backend can be found [here](https://www.github.com/mjbeaumont/mealcloud-portal). This was used to pitch the idea of a re-usable ordering platform that could embedded in the overall design of a restaurant's website to allow them to accept online orders quickly.
+This is the front end code for a prototype of a re-usable restaurant ordering app. The backend can be found [here](https://www.github.com/mjbeaumont/mealcloud-portal). 
+
+This was used to pitch the idea of a re-usable ordering platform that could embedded in the overall design of a restaurant's website to allow them to accept online orders quickly, and was created in under a month. It is a WIP.
 
 See [DEMO](https://mealcloud.beaumontwebdev.com) 
 
