@@ -5,6 +5,8 @@ This is the front end code for a prototype of a re-usable restaurant ordering ap
 
 This was used to pitch the idea of a re-usable ordering platform that could embedded in the overall design of a restaurant's website to allow them to accept online orders quickly, and was created in under a month. It is a WIP.
 
+Please see the [TODO](#TODO) for important information.
+
 See [DEMO](https://mealcloud.beaumontwebdev.com) 
 
 ## Technologies Used
@@ -33,7 +35,8 @@ You will need to copy .env.example to .env.development.local and provide your ow
 
 ## TODO
 
-1. Add Unit/E2E tests
-2. Create order confirmation page
-3. Make it more clear that menu categories can be expanded
-4. Auto-open cart after adding item to cart
+1. There is functionality that is handled by this app (order total calculations) that should NEVER be trusted to a client-side app. This should be moved to the server-side app.
+2. Add Unit/E2E tests
+3. Create order confirmation page
+4. Make it more clear that menu categories can be expanded
+5. Auto-open cart after adding item to cart
