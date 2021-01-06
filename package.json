@@ -14,7 +14,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@stripe/stripe-js": "^1.7.0",
     "autoprefixer": "^9.8.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.28",
     "primevue": "^2.0.0-rc.1",
